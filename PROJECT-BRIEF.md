@@ -18,42 +18,44 @@ Each week, the team of 4 developers will split into 2 pairs of 2 developers each
 
 Pairings will go as follows:
 
-#### Week 1, {start date - end date}
+## TCL-16
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 1, January 3 - 9
 
-#### Week 2, {start date - end date}
+1. Jessica & Maeesha
+2. Kevin & Waverley
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 2, January 10 - 16
 
-#### Week 3, {start date - end date}
+1. Waverley & Jessica
+2. Maeesha & Kevin
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 3, January 17 - 23
 
-#### Week 4, {start date - end date}
+1. Kevin & Jessica
+2. Maeesha & Waverley
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 4, January 24 - 30
 
-#### Week 5, {start date - end date}
+1. Jessica & Maeesha
+2. Kevin & Waverley
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 5, January 31 - February 6
 
-#### Week 6, {start date - end date}
+1. Waverley & Jessica
+2. Maeesha & Kevin
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 6, February 7 - 13
 
-#### Week 7, {start date - end date}
+1. Kevin & Jessica
+2. Maeesha & Waverley
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 7, February 14 - 20
 
-#### Week 8, {start date - end date}
+1. Jessica & Maeesha
+2. Kevin & Waverley
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+#### Week 8, February 21 - 27
+
+1. Waverley & Jessica
+2. Maeesha & Kevin
