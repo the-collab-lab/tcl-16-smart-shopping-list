@@ -4,11 +4,11 @@
 
 ### Locations for things
 
-- Site: {link to cohort live site}
-- Repo: {link to cohort repo}
-- Clone URL: `{clone URL}`
-- Issue list: {link to cohort repo issues}
-- Database: {link to cohort firebase database}
+- Site: [Production Site](https://tcl-16-smart-shopping-list.netlify.app)
+- Repo: [https://github.com/the-collab-lab/tcl-16-smart-shopping-list](https://github.com/the-collab-lab/tcl-16-smart-shopping-list)
+- Clone URL: `https://github.com/the-collab-lab/tcl-16-smart-shopping-list.git`
+- Issue list: [https://github.com/the-collab-lab/tcl-16-smart-shopping-list/issues](https://github.com/the-collab-lab/tcl-16-smart-shopping-list/issues)
+- Database: [https://console.firebase.google.com/u/0/project/tcl-16-smart-shopping-list/firestore](https://console.firebase.google.com/u/0/project/tcl-16-smart-shopping-list/firestore)
 
 ### Project cadence & duration
 
