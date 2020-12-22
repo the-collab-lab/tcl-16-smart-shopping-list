@@ -6,13 +6,12 @@ import 'firebase/firestore';
 // Initalize Firebase.
 // These details will need to be replaced with the project specific env vars at the start of each new cohort.
 var firebaseConfig = {
-  apiKey: { TCL_X_API_KEY },
-  authDomain: { TCL_X_AUTH_DOMAIN },
-  databaseURL: { TCL_X_DATABASE_URL },
-  projectId: { TCL_X_PROJECT_ID },
-  storageBucket: { TCL_X_STORAGE_BUCKET },
-  messagingSenderId: { TCL_X_SENDER_ID },
-  appId: { TCL_X_APP_ID },
+  apiKey: "AIzaSyAryrdGGzIRpgNIBOYTYm1nbAGP1n60m3E",
+  authDomain: "tcl-16-shopping-list.firebaseapp.com",
+  projectId: "tcl-16-shopping-list",
+  storageBucket: "tcl-16-shopping-list.appspot.com",
+  messagingSenderId: "673795137687",
+  appId: "1:673795137687:web:0cca36b195ad94bd0c89d2"
 };
 
 let fb = firebase.initializeApp(firebaseConfig);
