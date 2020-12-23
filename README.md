@@ -19,7 +19,7 @@ The app will work in many of the same ways as [iNeedToBuy.xyz](https://app.ineed
 
 ## More details for contributors
 
-🎉  If you’re a Collab Lab participant, first of all: WELCOME! We’re so excited to work with you and collaborate on something amazing.
+🎉  &nbsp; If you’re a Collab Lab participant, first of all: WELCOME! We’re so excited to work with you and collaborate on something amazing.
 
 ### Make your first contribution!
 
