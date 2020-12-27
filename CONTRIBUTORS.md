@@ -1,7 +1,9 @@
 # The Collab Lab
 
 ## Cohort Participants
+
 Jessica Salbert
+Maeesha Rahman
 
 ## Mentors
 
