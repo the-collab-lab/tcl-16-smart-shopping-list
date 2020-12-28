@@ -4,6 +4,7 @@
 
 Jessica Salbert
 Kevin Davis
+Maeesha Rahman
 
 ## Mentors
 
