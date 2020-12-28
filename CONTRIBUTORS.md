@@ -5,6 +5,7 @@
 Jessica Salbert
 Kevin Davis
 Maeesha Rahman
+Waverley Leung
 
 ## Mentors
 
