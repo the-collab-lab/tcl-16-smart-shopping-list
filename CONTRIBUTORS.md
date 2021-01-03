@@ -2,10 +2,10 @@
 
 ## Cohort Participants
 
-Jessica Salbert
-Kevin Davis
-Maeesha Rahman
-Waverley Leung
+* Jessica Salbert
+* Kevin Davis
+* Maeesha Rahman
+* Waverley Leung
 
 ## Mentors
 * Eddie Solar
