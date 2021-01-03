@@ -12,4 +12,6 @@
 * Melina (Meli) Mejía Bedoya
 * Skyler (Sky) Shaw 
 
-## Code of Conduct Contacts
+## Code of Conduct Contact
+
+* Michelle Sauque
