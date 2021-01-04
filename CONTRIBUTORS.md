@@ -2,11 +2,16 @@
 
 ## Cohort Participants
 
-Jessica Salbert
-Kevin Davis
-Maeesha Rahman
-Waverley Leung
+* Jessica Salbert
+* Kevin Davis
+* Maeesha Rahman
+* Waverley Leung
 
 ## Mentors
+* Eddie Solar
+* Melina (Meli) Mejía Bedoya
+* Skyler (Sky) Shaw 
 
-## Code of Conduct Contacts
+## Code of Conduct Contact
+
+* Michelle Sauque
