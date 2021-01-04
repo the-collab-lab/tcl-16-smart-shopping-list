@@ -7,8 +7,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>TCL-16</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to TCL-16! This app component is a good starting place for the
+          Smart Shopping List!
         </p>
         <a
           className="App-link"
