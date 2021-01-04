@@ -10,7 +10,7 @@ function App() {
         <h1>TCL-16</h1>
         <p>
           Welcome to TCL-16! This app component is a good starting place for the
-          Smart Shopping List app!
+          Smart Shopping List!
         </p>
         <a
           className="App-link"
