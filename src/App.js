@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './tcl-logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { fb } from './lib/firebase';
 
 function App() {
+  const [term, setTerm] = useState('');
+
+  // initialize firestore
+  const db = fb.firestore();
+
+  const onInputChange = (e) => {
+    setTerm(e.target.value);
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    db.collection('shoppingLists').add({
+      item: term,
+    });
+
+    setTerm('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>TCL-16</h1>
-        <p>
-          Welcome to TCL-16! This app component is a good starting place for the
-          Smart Shopping List!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>firestore connect</h1>
+      <form onSubmit={onSubmitHandler}>
+        <input value={term} onChange={onInputChange} />
+      </form>
     </div>
   );
 }
