@@ -3,30 +3,27 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
 
 const ShoppingList = () => {
-  const [term, setTerm] = useState('');
+  const [groceryItem, setGroceryItem] = useState('');
 
-  const [value, loading, error] = useCollection(
-    db.collection('shoppingLists'),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    },
-  );
+  const [value, loading, error] = useCollection(db.collection('shoppingList'), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
 
-  const onInputChange = (e) => {
-    setTerm(e.target.value);
+  const onGroceryItemChange = (e) => {
+    setGroceryItem(e.target.value);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    db.collection('shoppingLists').add({
-      item: term,
+    db.collection('shoppingList').add({
+      item: groceryItem,
     });
 
-    setTerm('');
+    setGroceryItem('');
   };
 
   const deleteItemHandler = (id) => {
-    db.collection('shoppingLists').doc(id).delete();
+    db.collection('shoppingList').doc(id).delete();
   };
 
   return (
@@ -38,8 +35,8 @@ const ShoppingList = () => {
           id="addItem"
           name="addItem"
           type="text"
-          value={term}
-          onChange={onInputChange}
+          value={groceryItem}
+          onChange={onGroceryItemChange}
         />
         <input type="submit" value="Submit" />
       </form>
@@ -48,9 +45,12 @@ const ShoppingList = () => {
         {loading && <span>Loading Shopping List...</span>}
         {value && (
           <ul>
-            {value.docs.map((doc) => (
-              <li key={doc.id} onClick={() => deleteItemHandler(doc.id)}>
-                {doc.data().item}
+            {value.docs.map((groceryItem) => (
+              <li
+                key={groceryItem.id}
+                onClick={() => deleteItemHandler(groceryItem.id)}
+              >
+                {groceryItem.data().item}
               </li>
             ))}
           </ul>
