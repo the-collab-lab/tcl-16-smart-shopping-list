@@ -9,7 +9,7 @@ const ShoppingList = () => {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
 
-  const onGroceryItemChange = (e) => {
+  const onGroceryItemInputChange = (e) => {
     setGroceryItem(e.target.value);
   };
 
@@ -36,7 +36,7 @@ const ShoppingList = () => {
           name="addItem"
           type="text"
           value={groceryItem}
-          onChange={onGroceryItemChange}
+          onChange={onGroceryItemInputChange}
         />
         <input type="submit" value="Submit" />
       </form>
