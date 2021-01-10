@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from './tcl-logo.svg';
 import './App.css';
+import ShoppingList from './components/ShoppingList';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,9 +21,10 @@ function App() {
         >
           Learn React
         </a>
+        <ShoppingList />
       </header>
     </div>
   );
-}
+};
 
 export default App;
