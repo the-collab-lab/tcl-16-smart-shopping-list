@@ -5,14 +5,16 @@ import 'firebase/firestore';
 
 // Initalize Firebase.
 var firebaseConfig = {
-  apiKey: "AIzaSyAryrdGGzIRpgNIBOYTYm1nbAGP1n60m3E",
-  authDomain: "tcl-16-shopping-list.firebaseapp.com",
-  projectId: "tcl-16-shopping-list",
-  storageBucket: "tcl-16-shopping-list.appspot.com",
-  messagingSenderId: "673795137687",
-  appId: "1:673795137687:web:0cca36b195ad94bd0c89d2"
+  apiKey: 'AIzaSyAryrdGGzIRpgNIBOYTYm1nbAGP1n60m3E',
+  authDomain: 'tcl-16-shopping-list.firebaseapp.com',
+  projectId: 'tcl-16-shopping-list',
+  storageBucket: 'tcl-16-shopping-list.appspot.com',
+  messagingSenderId: '673795137687',
+  appId: '1:673795137687:web:0cca36b195ad94bd0c89d2',
 };
 
 let fb = firebase.initializeApp(firebaseConfig);
 
 export { fb };
+// initialize firestore
+export const db = fb.firestore();

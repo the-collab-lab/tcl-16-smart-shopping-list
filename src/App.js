@@ -9,8 +9,9 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import ShoppingList from './components/ShoppingList';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">
@@ -22,7 +23,7 @@ function App() {
             the Smart Shopping List!
           </p>
           <h2>Week 1</h2>
-
+          <ShoppingList />
           <MenuLink activeWhenExact={true} to="/" label="List View" />
           <MenuLink to="/AddItem" label="Add Item" />
 
@@ -39,7 +40,7 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 function MenuLink({ label, to, activeWhenExact }) {
   let match = useRouteMatch({
