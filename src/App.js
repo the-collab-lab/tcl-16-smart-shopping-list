@@ -8,6 +8,7 @@ import {
   Link,
   useRouteMatch,
 } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -22,16 +23,17 @@ function App() {
           </p>
           <h2>Week 1</h2>
 
-          <MenuLink activeWhenExact={true} to="/ListView" label="List View" />
+          <MenuLink activeWhenExact={true} to="/" label="List View" />
           <MenuLink to="/AddItem" label="Add Item" />
 
           <Switch>
-            <Route exact path="/ListView">
+            <Route exact path="/">
               <ListView />
             </Route>
             <Route exact path="/AddItem">
               <AddItem />
             </Route>
+            <Route component={NotFound} />
           </Switch>
         </header>
       </div>
@@ -41,6 +43,7 @@ function App() {
 
 function MenuLink({ label, to, activeWhenExact }) {
   let match = useRouteMatch({
+    activeWhenExact: false,
     path: to,
     exact: activeWhenExact,
   });
