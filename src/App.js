@@ -42,9 +42,8 @@ const App = () => {
   );
 };
 
-function MenuLink({ label, to, activeWhenExact }) {
+function MenuLink({ label, to, activeWhenExact = false }) {
   let match = useRouteMatch({
-    activeWhenExact: false,
     path: to,
     exact: activeWhenExact,
   });
