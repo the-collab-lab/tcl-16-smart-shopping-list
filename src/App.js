@@ -7,9 +7,11 @@ import {
   Route,
   Link,
   useRouteMatch,
+  Redirect
 } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import ShoppingList from './components/ShoppingList';
+import Home from './components/Home';
 
 const App = () => {
   return (
@@ -24,11 +26,14 @@ const App = () => {
           </p>
           <h2>Week 1</h2>
           <ShoppingList />
-          <MenuLink activeWhenExact={true} to="/" label="List View" />
+          <MenuLink activeWhenExact={true} to="/ListView" label="List View" />
           <MenuLink to="/AddItem" label="Add Item" />
 
           <Switch>
             <Route exact path="/">
+              {localStorage.getItem("token") ? <Redirect to="/ListView" /> : <Home />}
+            </Route>
+            <Route exact path="/ListView">
               <ListView />
             </Route>
             <Route exact path="/AddItem">
