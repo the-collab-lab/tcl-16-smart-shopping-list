@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
+import { token } from '../lib/tokens';
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState('');
@@ -37,7 +38,7 @@ const AddItem = () => {
     <div className="shopping-list">
       <h1>Shopping List</h1>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="addItem">Add Item: </label>
+        <label htmlFor="addItem">Add Item:</label>
         <input
           id="addItem"
           name="addItem"
@@ -54,8 +55,8 @@ const AddItem = () => {
             name="estimate"
             onChange={onRadioInputChange}
           />
-          <label htmlFor="soon">Soon</label>
           <br />
+          <label htmlFor="soon">Soon</label>
           <input
             id="kinda-soon"
             value="14"
@@ -64,7 +65,6 @@ const AddItem = () => {
             onChange={onRadioInputChange}
           />
           <label htmlFor="kinda-soon">Kind of Soon</label>
-          <br />
           <input
             id="not-soon"
             value="30"
@@ -96,4 +96,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem;
+export default ShoppingList;
