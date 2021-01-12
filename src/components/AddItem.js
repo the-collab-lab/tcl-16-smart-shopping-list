@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
+import { token } from '../lib/tokens';
 
-const ShoppingList = () => {
+const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState('');
   const [estimate, setEstimate] = useState(null);
 
@@ -18,7 +19,8 @@ const ShoppingList = () => {
     e.preventDefault();
     db.collection('shoppingList').add({
       itemName: groceryItem,
-      estimate: estimate,
+      daysToPurchase: estimate,
+      lastPurchasedDate: null,
     });
 
     setGroceryItem('');
@@ -44,9 +46,8 @@ const ShoppingList = () => {
           value={groceryItem}
           onChange={onGroceryItemInputChange}
         />
-        <fieldset>
+        <fieldset border="none">
           <p>How soon will you buy this again?</p>
-          Soon
           <input
             id="soon"
             value="7"
@@ -54,7 +55,7 @@ const ShoppingList = () => {
             name="estimate"
             onChange={onRadioInputChange}
           />
-          Kind of soon
+          <label htmlFor="soon">Soon</label>
           <input
             id="kinda-soon"
             value="14"
@@ -62,7 +63,7 @@ const ShoppingList = () => {
             name="estimate"
             onChange={onRadioInputChange}
           />
-          Not soon
+          <label htmlFor="kinda-soon">Kind of Soon</label>
           <input
             id="not-soon"
             value="30"
@@ -70,6 +71,7 @@ const ShoppingList = () => {
             name="estimate"
             onChange={onRadioInputChange}
           />
+          <label htmlFor="not-soon">Not Soon</label>
         </fieldset>
         <input type="submit" value="Submit" />
       </form>
@@ -93,4 +95,4 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+export default AddItem;

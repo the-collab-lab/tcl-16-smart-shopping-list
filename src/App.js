@@ -9,7 +9,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import NotFound from './components/NotFound';
-import ShoppingList from './components/ShoppingList';
+import AddItem from './components/AddItem';
 
 const App = () => {
   return (
@@ -23,7 +23,7 @@ const App = () => {
             the Smart Shopping List!
           </p>
           <h2>Week 1</h2>
-          <ShoppingList />
+          <AddItem />
           <MenuLink activeWhenExact={true} to="/" label="List View" />
           <MenuLink to="/AddItem" label="Add Item" />
 
@@ -59,14 +59,6 @@ function ListView() {
   return (
     <div>
       <h3>List View</h3>
-    </div>
-  );
-}
-
-function AddItem() {
-  return (
-    <div>
-      <h3>Add Item</h3>
     </div>
   );
 }
