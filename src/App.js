@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
+import ListView from './components/ListView';
 
 const App = () => {
   return (
@@ -23,12 +24,11 @@ const App = () => {
             the Smart Shopping List!
           </p>
           <h2>Week 1</h2>
-          <AddItem />
-          <MenuLink activeWhenExact={true} to="/" label="List View" />
+          <MenuLink activeWhenExact={true} to="/ListView" label="List View" />
           <MenuLink to="/AddItem" label="Add Item" />
 
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/ListView">
               <ListView />
             </Route>
             <Route exact path="/AddItem">
@@ -51,14 +51,6 @@ function MenuLink({ label, to, activeWhenExact = false }) {
   return (
     <div className={match ? 'active' : ''}>
       <Link to={to}>{label}</Link>
-    </div>
-  );
-}
-
-function ListView() {
-  return (
-    <div>
-      <h3>List View</h3>
     </div>
   );
 }

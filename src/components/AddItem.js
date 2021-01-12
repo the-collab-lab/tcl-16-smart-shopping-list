@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState('');
-  const [estimate, setEstimate] = useState(null);
-
-  const [value, loading, error] = useCollection(db.collection('shoppingList'), {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  const [daysToPurchase, setDaysToPurchase] = useState(null);
 
   const onGroceryItemInputChange = (e) => {
     setGroceryItem(e.target.value);
@@ -18,7 +13,7 @@ const AddItem = () => {
     e.preventDefault();
     db.collection('shoppingList').add({
       itemName: groceryItem,
-      daysToPurchase: estimate,
+      daysToPurchase: daysToPurchase,
       lastPurchasedDate: null,
     });
 
@@ -26,18 +21,13 @@ const AddItem = () => {
   };
 
   const onRadioInputChange = (e) => {
-    setEstimate(parseInt(e.target.value));
-  };
-
-  const deleteItemHandler = (id) => {
-    db.collection('shoppingList').doc(id).delete();
+    setDaysToPurchase(parseInt(e.target.value));
   };
 
   return (
-    <div className="shopping-list">
-      <h1>Shopping List</h1>
+    <div className="add-item">
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="addItem">Add Item: </label>
+        <label htmlFor="addItem">Item name: </label>
         <input
           id="addItem"
           name="addItem"
@@ -51,7 +41,7 @@ const AddItem = () => {
             id="soon"
             value="7"
             type="radio"
-            name="estimate"
+            name="daysToPurchase"
             onChange={onRadioInputChange}
           />
           <label htmlFor="soon">Soon</label>
@@ -60,7 +50,7 @@ const AddItem = () => {
             id="kinda-soon"
             value="14"
             type="radio"
-            name="estimate"
+            name="daysToPurchase"
             onChange={onRadioInputChange}
           />
           <label htmlFor="kinda-soon">Kind of Soon</label>
@@ -69,29 +59,13 @@ const AddItem = () => {
             id="not-soon"
             value="30"
             type="radio"
-            name="estimate"
+            name="daysToPurchase"
             onChange={onRadioInputChange}
           />
           <label htmlFor="not-soon">Not Soon</label>
         </fieldset>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Add Item" />
       </form>
-      <div>
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
-        {loading && <span>Loading Shopping List...</span>}
-        {value && (
-          <ul>
-            {value.docs.map((groceryItem) => (
-              <li
-                key={groceryItem.id}
-                onClick={() => deleteItemHandler(groceryItem.id)}
-              >
-                {groceryItem.data().itemName}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
   );
 };
