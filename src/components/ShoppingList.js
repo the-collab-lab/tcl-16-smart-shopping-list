@@ -4,6 +4,7 @@ import { db } from '../lib/firebase';
 
 const ShoppingList = () => {
   const [groceryItem, setGroceryItem] = useState('');
+  const [estimate, setEstimate] = useState(null);
 
   const [value, loading, error] = useCollection(db.collection('shoppingList'), {
     snapshotListenOptions: { includeMetadataChanges: true },
@@ -16,10 +17,15 @@ const ShoppingList = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     db.collection('shoppingList').add({
-      item: groceryItem,
+      itemName: groceryItem,
+      estimate: estimate,
     });
 
     setGroceryItem('');
+  };
+
+  const onRadioInputChange = (e) => {
+    setEstimate(parseInt(e.target.value));
   };
 
   const deleteItemHandler = (id) => {
@@ -38,6 +44,33 @@ const ShoppingList = () => {
           value={groceryItem}
           onChange={onGroceryItemInputChange}
         />
+        <fieldset>
+          <p>How soon will you buy this again?</p>
+          Soon
+          <input
+            id="soon"
+            value="7"
+            type="radio"
+            name="estimate"
+            onChange={onRadioInputChange}
+          />
+          Kind of soon
+          <input
+            id="kinda-soon"
+            value="14"
+            type="radio"
+            name="estimate"
+            onChange={onRadioInputChange}
+          />
+          Not soon
+          <input
+            id="not-soon"
+            value="30"
+            type="radio"
+            name="estimate"
+            onChange={onRadioInputChange}
+          />
+        </fieldset>
         <input type="submit" value="Submit" />
       </form>
       <div>
@@ -50,7 +83,7 @@ const ShoppingList = () => {
                 key={groceryItem.id}
                 onClick={() => deleteItemHandler(groceryItem.id)}
               >
-                {groceryItem.data().item}
+                {groceryItem.data().itemName}
               </li>
             ))}
           </ul>
