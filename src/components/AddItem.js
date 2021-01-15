@@ -11,7 +11,7 @@ const AddItem = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    db.collection('shoppingList').add({
+    db.collection(localStorage.getItem('token')).add({
       itemName: groceryItem,
       daysToPurchase: daysToPurchase,
       lastPurchasedDate: null,

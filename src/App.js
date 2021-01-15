@@ -7,10 +7,12 @@ import {
   Route,
   Link,
   useRouteMatch,
+  Redirect,
 } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
 import ListView from './components/ListView';
+import Home from './components/Home';
 
 const App = () => {
   return (
@@ -28,6 +30,13 @@ const App = () => {
           <MenuLink to="/AddItem" label="Add Item" />
 
           <Switch>
+            <Route exact path="/">
+              {localStorage.getItem('token') ? (
+                <Redirect to="/ListView" />
+              ) : (
+                <Home />
+              )}
+            </Route>
             <Route exact path="/ListView">
               <ListView />
             </Route>

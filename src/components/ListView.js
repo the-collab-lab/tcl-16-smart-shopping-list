@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
+import { useHistory } from 'react-router-dom';
 
 const ListView = () => {
-  const [value, loading, error] = useCollection(db.collection('shoppingList'), {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      history.push('/');
+    } else {
+      history.push('/ListView');
+    }
+  }, []);
+
+  const [value, loading, error] = useCollection(
+    db.collection(localStorage.getItem('token')),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    },
+  );
 
   const deleteItemHandler = (id) => {
-    db.collection('shoppingList').doc(id).delete();
+    db.collection(localStorage.getItem('token')).doc(id).delete();
   };
 
   return (
