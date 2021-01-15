@@ -9,6 +9,7 @@ import {
   useRouteMatch,
   Redirect,
 } from 'react-router-dom';
+
 import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
 import ListView from './components/ListView';
@@ -26,8 +27,8 @@ const App = () => {
             the Smart Shopping List!
           </p>
           <h2>Week 1</h2>
-          <MenuLink activeWhenExact={true} to="/ListView" label="List View" />
-          <MenuLink to="/AddItem" label="Add Item" />
+          <MenuLink activeWhenExact={true} pathTo="/" label="List View" />
+          <MenuLink pathTo="/AddItem" label="Add Item" />
 
           <Switch>
             <Route exact path="/">
@@ -51,17 +52,17 @@ const App = () => {
   );
 };
 
-function MenuLink({ label, to, activeWhenExact = false }) {
+const MenuLink = ({ label, pathTo, activeWhenExact = false }) => {
   let match = useRouteMatch({
-    path: to,
+    path: pathTo,
     exact: activeWhenExact,
   });
 
   return (
     <div className={match ? 'active' : ''}>
-      <Link to={to}>{label}</Link>
+      <Link to={pathTo}>{label}</Link>
     </div>
   );
-}
+};
 
 export default App;
