@@ -12,7 +12,7 @@ const ListView = () => {
     } else {
       history.push('/ListView');
     }
-  });
+  }, [history]);
 
   const [groceryItem, setGroceryItem] = useState('');
 
