@@ -18,6 +18,7 @@ const AddItem = () => {
     });
 
     setGroceryItem('');
+    setDaysToPurchase(null);
   };
 
   const onRadioInputChange = (e) => {
@@ -43,6 +44,7 @@ const AddItem = () => {
             type="radio"
             name="daysToPurchase"
             onChange={onRadioInputChange}
+            checked={daysToPurchase === 7}
           />
           <label htmlFor="soon">Soon</label>
           <br />
@@ -52,6 +54,7 @@ const AddItem = () => {
             type="radio"
             name="daysToPurchase"
             onChange={onRadioInputChange}
+            checked={daysToPurchase === 14}
           />
           <label htmlFor="kinda-soon">Kind of Soon</label>
           <br />
@@ -61,6 +64,7 @@ const AddItem = () => {
             type="radio"
             name="daysToPurchase"
             onChange={onRadioInputChange}
+            checked={daysToPurchase === 30}
           />
           <label htmlFor="not-soon">Not Soon</label>
         </fieldset>

@@ -12,7 +12,7 @@ const ListView = () => {
     } else {
       history.push('/ListView');
     }
-  }, []);
+  }, [history]);
 
   const [value, loading, error] = useCollection(
     db.collection(localStorage.getItem('token')),
