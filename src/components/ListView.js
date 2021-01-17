@@ -14,6 +14,7 @@ const ListView = () => {
     }
   }, [history]);
 
+
   const [value, loading, error] = useCollection(
     db.collection(localStorage.getItem('token')),
     {

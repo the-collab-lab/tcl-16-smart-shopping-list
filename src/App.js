@@ -10,7 +10,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
 import ListView from './components/ListView';
 import Home from './components/Home';
@@ -42,7 +41,7 @@ const App = () => {
               <ListView />
             </Route>
             <Route exact path="/AddItem">
-              <AddItem />
+              {/* <AddItem /> */}
             </Route>
             <Route component={NotFound} />
           </Switch>
