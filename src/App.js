@@ -10,6 +10,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
 import ListView from './components/ListView';
 import Home from './components/Home';
