@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { db } from '../lib/firebase';
+import { useHistory } from 'react-router-dom';
 
 const AddItem = () => {
+  const history = useHistory();
   const [groceryItem, setGroceryItem] = useState('');
   const [daysToPurchase, setDaysToPurchase] = useState(null);
 
@@ -17,6 +19,7 @@ const AddItem = () => {
       lastPurchasedDate: null,
     });
 
+    history.push('/ListView');
     setGroceryItem('');
     setDaysToPurchase(null);
   };

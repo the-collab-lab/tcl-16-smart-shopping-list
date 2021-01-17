@@ -6,7 +6,6 @@ import {
   Route,
   Link,
   useRouteMatch,
-  Redirect,
 } from 'react-router-dom';
 
 import NotFound from './components/NotFound';
@@ -18,27 +17,31 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <MenuLink activeWhenExact={true} pathTo="/" label="List View" />
-          <MenuLink pathTo="/AddItem" label="Add Item" />
+        {localStorage.getItem('token') ? (
+          <div>
+            <MenuLink
+              activeWhenExact={true}
+              pathTo="/ListView"
+              label="List View"
+            />
+            <MenuLink pathTo="/AddItem" label="Add Item" />
 
-          <Switch>
-            <Route exact path="/">
-              {localStorage.getItem('token') ? (
-                <Redirect to="/ListView" />
-              ) : (
-                <Home />
-              )}
-            </Route>
-            <Route exact path="/ListView">
-              <ListView />
-            </Route>
-            <Route exact path="/AddItem">
-              <AddItem />
-            </Route>
-            <Route component={NotFound} />
-          </Switch>
-        </header>
+            <Switch>
+              <Route exact path="/">
+                <ListView />
+              </Route>
+              <Route exact path="/ListView">
+                <ListView />
+              </Route>
+              <Route exact path="/AddItem">
+                <AddItem />
+              </Route>
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+        ) : (
+          <Home />
+        )}
       </div>
     </Router>
   );
