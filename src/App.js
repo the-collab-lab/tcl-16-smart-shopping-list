@@ -42,7 +42,7 @@ const App = () => {
               <ListView />
             </Route>
             <Route exact path="/AddItem">
-              {/* <AddItem /> */}
+              <AddItem />
             </Route>
             <Route component={NotFound} />
           </Switch>
