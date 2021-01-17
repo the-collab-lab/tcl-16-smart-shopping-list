@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
+import { useHistory } from 'react-router-dom';
 
-const ShoppingList = () => {
+const ListView = () => {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      history.push('/');
+    } else {
+      history.push('/ListView');
+    }
+  }, [history]);
+
   const [groceryItem, setGroceryItem] = useState('');
 
   const [value, loading, error] = useCollection(db.collection('shoppingList'), {
@@ -17,6 +28,7 @@ const ShoppingList = () => {
     e.preventDefault();
     db.collection('shoppingList').add({
       item: groceryItem,
+      hello: 'goodbye',
     });
 
     setGroceryItem('');
@@ -60,4 +72,4 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+export default ListView;
