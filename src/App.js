@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './tcl-logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -20,13 +19,6 @@ const App = () => {
     <Router>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>TCL-16</h1>
-          <p>
-            Welcome to TCL-16! This app component is a good starting place for
-            the Smart Shopping List!
-          </p>
-          <h2>Week 1</h2>
           <MenuLink activeWhenExact={true} pathTo="/" label="List View" />
           <MenuLink pathTo="/AddItem" label="Add Item" />
 
