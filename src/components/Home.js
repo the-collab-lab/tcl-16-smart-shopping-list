@@ -12,7 +12,14 @@ const Home = (props) => {
     history.push('/ListView');
   };
 
-  return <button onClick={generateToken}>Create a new list</button>;
+  return (
+    <div className="home">
+      <h1>Welcome to Smart Shopping List!</h1>
+      <button className="new-list-btn" onClick={generateToken}>
+        Create a new list
+      </button>
+    </div>
+  );
 };
 
 export default Home;
