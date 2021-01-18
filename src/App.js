@@ -20,44 +20,35 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
-        {!auth ? (
-          <Home />
-        ) : (
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1>TCL-16</h1>
-            <p>
-              Welcome to TCL-16! This app component is a good starting place for
-              the Smart Shopping List!
-            </p>
-            <h2>Week 1</h2>
-            <MenuLink
-              activeWhenExact={true}
-              pathTo="/ListView"
-              label="List View"
-            />
-            <MenuLink pathTo="/AddItem" label="Add Item" />
+      {!auth ? (
+        <Home />
+      ) : (
+        <div className="App">
+          <MenuLink
+            activeWhenExact={true}
+            pathTo="/ListView"
+            label="List View"
+          />
+          <MenuLink pathTo="/AddItem" label="Add Item" />
 
-            <Switch>
-              {/* <Route exact path="/">
-              {localStorage.getItem('token') ? (
-                <Redirect to="/ListView" />
-              ) : (
-                <Home />
-              )}
-            </Route> */}
-              <Route exact path="/ListView">
-                <ListView />
-              </Route>
-              <Route exact path="/AddItem">
-                <AddItem />
-              </Route>
-              <Route component={NotFound} />
-            </Switch>
-          </header>
-        )}
-      </div>
+          <Switch>
+            {/* <Route exact path="/">
+            {localStorage.getItem('token') ? (
+              <Redirect to="/ListView" />
+            ) : (
+              <Home />
+            )}
+          </Route> */}
+            <Route exact path="/ListView">
+              <ListView />
+            </Route>
+            <Route exact path="/AddItem">
+              <AddItem />
+            </Route>
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      )}
     </Router>
   );
 };
