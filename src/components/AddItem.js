@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { db } from '../lib/firebase';
+import { useHistory } from 'react-router-dom';
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState('');
   const [daysToPurchase, setDaysToPurchase] = useState(null);
+
+  const history = useHistory();
 
   const onGroceryItemInputChange = (e) => {
     setGroceryItem(e.target.value);
@@ -19,6 +22,8 @@ const AddItem = () => {
 
     setGroceryItem('');
     setDaysToPurchase(null);
+
+    history.push('/ListView');
   };
 
   const onRadioInputChange = (e) => {
