@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './tcl-logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -13,16 +12,13 @@ import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
 import ListView from './components/ListView';
 import Home from './components/Home';
-import { useAuth } from './auth';
 
 const App = () => {
-  const auth = useAuth();
+  const [auth, setAuth] = useState(localStorage.getItem('token'));
 
   return (
     <Router>
-      {!auth ? (
-        <Home />
-      ) : (
+      {auth ? (
         <div className="App">
           <MenuLink
             activeWhenExact={true}
@@ -32,13 +28,6 @@ const App = () => {
           <MenuLink pathTo="/AddItem" label="Add Item" />
 
           <Switch>
-            {/* <Route exact path="/">
-            {localStorage.getItem('token') ? (
-              <Redirect to="/ListView" />
-            ) : (
-              <Home />
-            )}
-          </Route> */}
             <Route exact path="/ListView">
               <ListView />
             </Route>
@@ -48,6 +37,8 @@ const App = () => {
             <Route component={NotFound} />
           </Switch>
         </div>
+      ) : (
+        <Home setAuth={setAuth} />
       )}
     </Router>
   );

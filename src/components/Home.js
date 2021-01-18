@@ -2,12 +2,13 @@ import React from 'react';
 import getToken from '../lib/tokens.js';
 import { useHistory } from 'react-router-dom';
 
-const Home = () => {
+const Home = (props) => {
   const history = useHistory();
 
   const generateToken = () => {
     const token = getToken();
     localStorage.setItem('token', token);
+    props.setAuth(true);
     history.push('/ListView');
   };
 
