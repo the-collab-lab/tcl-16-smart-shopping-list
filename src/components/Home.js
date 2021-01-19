@@ -21,9 +21,22 @@ const Home = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    db.collection(localStorage.getItem('token')).add({});
 
-    history.push('/ListView');
+    db.collection(token)
+      .get()
+      .then(function (querySnapshot) {
+        if (querySnapshot.empty) {
+          alert('uh oh! list does not exist');
+        } else {
+          localStorage.setItem('token', token);
+          history.push('/ListView'); // when joining url is /ListView but ListView component does not render until refresh
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+
+    setToken('');
   };
 
   return (
