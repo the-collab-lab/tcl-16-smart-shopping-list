@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './tcl-logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,7 +6,6 @@ import {
   Route,
   Link,
   useRouteMatch,
-  Redirect,
 } from 'react-router-dom';
 
 import NotFound from './components/NotFound';
@@ -16,28 +14,20 @@ import ListView from './components/ListView';
 import Home from './components/Home';
 
 const App = () => {
+  const [auth, setAuth] = useState(localStorage.getItem('token'));
+
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>TCL-16</h1>
-          <p>
-            Welcome to TCL-16! This app component is a good starting place for
-            the Smart Shopping List!
-          </p>
-          <h2>Week 1</h2>
-          <MenuLink activeWhenExact={true} pathTo="/" label="List View" />
+      {auth ? (
+        <div className="App">
+          <MenuLink
+            activeWhenExact={true}
+            pathTo="/ListView"
+            label="List View"
+          />
           <MenuLink pathTo="/AddItem" label="Add Item" />
 
           <Switch>
-            <Route exact path="/">
-              {localStorage.getItem('token') ? (
-                <Redirect to="/ListView" />
-              ) : (
-                <Home />
-              )}
-            </Route>
             <Route exact path="/ListView">
               <ListView />
             </Route>
@@ -46,8 +36,10 @@ const App = () => {
             </Route>
             <Route component={NotFound} />
           </Switch>
-        </header>
-      </div>
+        </div>
+      ) : (
+        <Home setAuth={setAuth} />
+      )}
     </Router>
   );
 };

@@ -1,20 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
-import { useHistory } from 'react-router-dom';
 
 const ListView = () => {
-  const history = useHistory();
-
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      history.push('/');
-    } else {
-      history.push('/ListView');
-    }
-  }, [history]);
-
-
   const [value, loading, error] = useCollection(
     db.collection(localStorage.getItem('token')),
     {
