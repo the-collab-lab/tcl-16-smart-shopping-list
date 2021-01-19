@@ -8,7 +8,7 @@ const Home = (props) => {
   const generateToken = () => {
     const token = getToken();
     localStorage.setItem('token', token);
-    props.setAuth(true);
+    props.setAuth(token);
     history.push('/ListView');
   };
 
