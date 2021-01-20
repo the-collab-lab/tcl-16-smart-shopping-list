@@ -28,6 +28,9 @@ const App = () => {
           <MenuLink pathTo="/AddItem" label="Add Item" />
 
           <Switch>
+            <Route exact path="/">
+              <ListView />
+            </Route>
             <Route exact path="/ListView">
               <ListView />
             </Route>

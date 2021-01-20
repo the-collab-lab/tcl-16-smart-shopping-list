@@ -12,8 +12,10 @@ const AddItem = () => {
     setGroceryItem(e.target.value);
   };
 
-  const onSubmitHandler = (e) => {
+  async function onSubmitHandler(e) {
+    await existingItemCheck(groceryItem);
     e.preventDefault();
+    console.log('Item passing');
     db.collection(localStorage.getItem('token')).add({
       itemName: groceryItem,
       daysToPurchase: daysToPurchase,
@@ -24,6 +26,20 @@ const AddItem = () => {
     setDaysToPurchase(null);
 
     history.push('/ListView');
+  }
+
+  const existingItemCheck = (i) => {
+    db.collection(localStorage.getItem('token'))
+      .get()
+      .then(function (querySnapshot) {
+        console.log(i);
+        querySnapshot.forEach(function (doc) {
+          if (doc.data().itemName === i) {
+            alert('That item exists!');
+          }
+          console.log(doc.data().itemName);
+        });
+      });
   };
 
   const onRadioInputChange = (e) => {
@@ -40,6 +56,7 @@ const AddItem = () => {
           type="text"
           value={groceryItem}
           onChange={onGroceryItemInputChange}
+          required
         />
         <fieldset border="none">
           <p>How soon will you buy this again?</p>
