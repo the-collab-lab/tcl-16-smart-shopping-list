@@ -13,9 +13,12 @@ const AddItem = () => {
   };
 
   async function onSubmitHandler(e) {
-    await existingItemCheck(groceryItem);
     e.preventDefault();
-    console.log('Item passing');
+    const alreadyExists = await existingItemCheck(groceryItem);
+    if (alreadyExists) {
+      alert('Item already on shoppping list');
+      return;
+    }
     db.collection(localStorage.getItem('token')).add({
       itemName: groceryItem,
       daysToPurchase: daysToPurchase,
@@ -28,18 +31,28 @@ const AddItem = () => {
     history.push('/ListView');
   }
 
-  const existingItemCheck = (i) => {
-    db.collection(localStorage.getItem('token'))
+  const existingItemCheck = async (item) => {
+    let alreadyExists = false;
+    await db
+      .collection(localStorage.getItem('token'))
       .get()
       .then(function (querySnapshot) {
-        console.log(i);
         querySnapshot.forEach(function (doc) {
-          if (doc.data().itemName === i) {
-            alert('That item exists!');
+          if (
+            sanitizeItemInput(doc.data().itemName) === sanitizeItemInput(item)
+          ) {
+            alreadyExists = true;
           }
-          console.log(doc.data().itemName);
         });
+      })
+      .catch((e) => {
+        alert(e.message);
       });
+    return alreadyExists;
+  };
+
+  const sanitizeItemInput = (item) => {
+    return item.replace(/[\W_]+/g, '').toLowerCase();
   };
 
   const onRadioInputChange = (e) => {
@@ -67,6 +80,7 @@ const AddItem = () => {
             name="daysToPurchase"
             onChange={onRadioInputChange}
             checked={daysToPurchase === 7}
+            required
           />
           <label htmlFor="soon">Soon</label>
           <br />
