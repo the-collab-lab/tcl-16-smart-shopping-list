@@ -29,6 +29,7 @@ const Home = (props) => {
           alert('uh oh! list does not exist');
         } else {
           localStorage.setItem('token', token);
+          props.setAuth(token);
           history.push('/ListView'); // when joining url is /ListView but ListView component does not render until refresh
         }
       })
