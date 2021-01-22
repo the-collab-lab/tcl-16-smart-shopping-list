@@ -12,7 +12,7 @@ const AddItem = () => {
     setGroceryItem(e.target.value);
   };
 
-  async function onSubmitHandler(e) {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     const alreadyExists = await existingItemCheck(groceryItem);
     if (alreadyExists) {
@@ -29,15 +29,15 @@ const AddItem = () => {
     setDaysToPurchase(null);
 
     history.push('/ListView');
-  }
+  };
 
   const existingItemCheck = async (item) => {
     let alreadyExists = false;
     await db
       .collection(localStorage.getItem('token'))
       .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
           if (
             sanitizeItemInput(doc.data().itemName) === sanitizeItemInput(item)
           ) {
