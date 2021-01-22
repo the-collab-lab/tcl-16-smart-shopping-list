@@ -4,15 +4,14 @@ import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 
 const Home = (props) => {
-  const [token, setToken] = useState('');
-
+  const [token, setToken] = useState("");
   const history = useHistory();
 
   const generateToken = () => {
     const token = getToken();
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     props.setAuth(token);
-    history.push('/ListView');
+    history.push("/ListView");
   };
 
   const onTokenInputChange = (e) => {
@@ -24,20 +23,20 @@ const Home = (props) => {
 
     db.collection(token)
       .get()
-      .then(function (querySnapshot) {
+      .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          alert('uh oh! list does not exist');
+          alert("uh oh! list does not exist");
         } else {
-          localStorage.setItem('token', token);
+          localStorage.setItem("token", token);
           props.setAuth(token);
-          history.push('/ListView');
+          history.push("/ListView");
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         alert(error);
       });
 
-    setToken('');
+    setToken("");
   };
 
   return (
