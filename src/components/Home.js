@@ -30,7 +30,7 @@ const Home = (props) => {
         } else {
           localStorage.setItem('token', token);
           props.setAuth(token);
-          history.push('/ListView'); // when joining url is /ListView but ListView component does not render until refresh
+          history.push('/ListView');
         }
       })
       .catch(function (error) {
@@ -49,7 +49,7 @@ const Home = (props) => {
       <p>- or -</p>
       <p>Join an existing shopping list by entering a three word token.</p>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="joinList">Share token </label>
+        <label htmlFor="joinList">Paste token here: </label>
         <input
           id="joinList"
           name="joinList"
