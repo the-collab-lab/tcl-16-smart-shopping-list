@@ -12,6 +12,14 @@ const AddItem = () => {
     setGroceryItem(e.target.value);
   };
 
+  const sanitizeItemInput = (item) => {
+    return item.replace(/[\W_]+/g, '').toLowerCase();
+  };
+
+  const onRadioInputChange = (e) => {
+    setDaysToPurchase(parseInt(e.target.value));
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const alreadyExists = await existingItemCheck(groceryItem);
@@ -49,14 +57,6 @@ const AddItem = () => {
         alert(e.message);
       });
     return alreadyExists;
-  };
-
-  const sanitizeItemInput = (item) => {
-    return item.replace(/[\W_]+/g, '').toLowerCase();
-  };
-
-  const onRadioInputChange = (e) => {
-    setDaysToPurchase(parseInt(e.target.value));
   };
 
   return (
