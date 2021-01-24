@@ -1,17 +1,17 @@
-import React from 'react';
-import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../lib/firebase';
+import React from "react";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { db } from "../lib/firebase";
 
 const ListView = () => {
   const [value, loading, error] = useCollection(
-    db.collection(localStorage.getItem('token')),
+    db.collection(localStorage.getItem("token")),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     },
   );
 
   const deleteItemHandler = (id) => {
-    db.collection(localStorage.getItem('token')).doc(id).delete();
+    db.collection(localStorage.getItem("token")).doc(id).delete();
   };
 
   return (

@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   useRouteMatch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import NotFound from './components/NotFound';
-import AddItem from './components/AddItem';
-import ListView from './components/ListView';
-import Home from './components/Home';
+import NotFound from "./components/NotFound";
+import AddItem from "./components/AddItem";
+import ListView from "./components/ListView";
+import Home from "./components/Home";
 
 const App = () => {
-  const [auth, setAuth] = useState(localStorage.getItem('token'));
+  const [auth, setAuth] = useState(localStorage.getItem("token"));
 
   return (
     <Router>
@@ -28,6 +28,9 @@ const App = () => {
           <MenuLink pathTo="/AddItem" label="Add Item" />
 
           <Switch>
+            <Route exact path="/">
+              <ListView />
+            </Route>
             <Route exact path="/ListView">
               <ListView />
             </Route>
@@ -51,7 +54,7 @@ const MenuLink = ({ label, pathTo, activeWhenExact = false }) => {
   });
 
   return (
-    <div className={match ? 'active' : ''}>
+    <div className={match ? "active" : ""}>
       <Link to={pathTo}>{label}</Link>
     </div>
   );

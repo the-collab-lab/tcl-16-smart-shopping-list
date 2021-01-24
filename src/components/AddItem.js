@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { db } from '../lib/firebase';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { db } from "../lib/firebase";
+import { useHistory } from "react-router-dom";
 
 const AddItem = () => {
-  const [groceryItem, setGroceryItem] = useState('');
+  const [groceryItem, setGroceryItem] = useState("");
   const [daysToPurchase, setDaysToPurchase] = useState(null);
 
   const history = useHistory();
@@ -12,22 +12,51 @@ const AddItem = () => {
     setGroceryItem(e.target.value);
   };
 
-  const onSubmitHandler = (e) => {
+  const sanitizeItemInput = (item) => {
+    return item.replace(/[\W_]+/g, "").toLowerCase();
+  };
+
+  const onRadioInputChange = (e) => {
+    setDaysToPurchase(parseInt(e.target.value));
+  };
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    db.collection(localStorage.getItem('token')).add({
+    const alreadyExists = await existingItemCheck(groceryItem);
+    if (alreadyExists) {
+      alert("Item already on shoppping list");
+      return;
+    }
+    db.collection(localStorage.getItem("token")).add({
       itemName: groceryItem,
       daysToPurchase: daysToPurchase,
       lastPurchasedDate: null,
     });
 
-    setGroceryItem('');
+    setGroceryItem("");
     setDaysToPurchase(null);
 
-    history.push('/ListView');
+    history.push("/ListView");
   };
 
-  const onRadioInputChange = (e) => {
-    setDaysToPurchase(parseInt(e.target.value));
+  const existingItemCheck = async (item) => {
+    let alreadyExists = false;
+    await db
+      .collection(localStorage.getItem("token"))
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (
+            sanitizeItemInput(doc.data().itemName) === sanitizeItemInput(item)
+          ) {
+            alreadyExists = true;
+          }
+        });
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
+    return alreadyExists;
   };
 
   return (
@@ -40,6 +69,7 @@ const AddItem = () => {
           type="text"
           value={groceryItem}
           onChange={onGroceryItemInputChange}
+          required
         />
         <fieldset border="none">
           <p>How soon will you buy this again?</p>
@@ -50,6 +80,7 @@ const AddItem = () => {
             name="daysToPurchase"
             onChange={onRadioInputChange}
             checked={daysToPurchase === 7}
+            required
           />
           <label htmlFor="soon">Soon</label>
           <br />
