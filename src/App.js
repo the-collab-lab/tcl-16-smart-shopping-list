@@ -10,7 +10,7 @@ import {
 
 import NotFound from './components/NotFound';
 import AddItem from './components/AddItem';
-import ListView from './components/ShoppingList/ListView';
+import ListContainer from './components/ShoppingList/ListContainer';
 import Home from './components/Home';
 
 const App = () => {
@@ -20,19 +20,14 @@ const App = () => {
     <Router>
       {auth ? (
         <div className="App">
-          <MenuLink
-            activeWhenExact={true}
-            pathTo="/ListView"
-            label="List View"
-          />
+          <MenuLink activeWhenExact={true} pathTo="/List" label="List View" />
           <MenuLink pathTo="/AddItem" label="Add Item" />
-
           <Switch>
             <Route exact path="/">
-              <ListView />
+              <ListContainer />
             </Route>
-            <Route exact path="/ListView">
-              <ListView />
+            <Route exact path="/List">
+              <ListContainer />
             </Route>
             <Route exact path="/AddItem">
               <AddItem />
