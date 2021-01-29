@@ -41,9 +41,9 @@ const Home = (props) => {
 
   return (
     <div className="home">
-      <h1>Welcome to Smart-Shopper! Your shopping list is empty.</h1>
+      <h1>Welcome to Smart-Shopper! Let's make a list and start tracking.</h1>
       <button className="new-list-btn" onClick={generateToken}>
-        Add item
+        Create new list
       </button>
       <p>- or -</p>
       <p>Join an existing shopping list by entering a three word token.</p>
