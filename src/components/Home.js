@@ -11,7 +11,7 @@ const Home = (props) => {
     const token = getToken();
     localStorage.setItem('token', token);
     props.setAuth(token);
-    history.push('/ListView');
+    history.push('/List');
   };
 
   const onTokenInputChange = (e) => {
@@ -29,7 +29,7 @@ const Home = (props) => {
         } else {
           localStorage.setItem('token', token);
           props.setAuth(token);
-          history.push('/ListView');
+          history.push('/List');
         }
       })
       .catch((error) => {
