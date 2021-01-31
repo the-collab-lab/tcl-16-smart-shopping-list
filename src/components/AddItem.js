@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { db } from "../lib/firebase";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { db } from '../lib/firebase';
+import { useHistory } from 'react-router-dom';
 
 const AddItem = () => {
-  const [groceryItem, setGroceryItem] = useState("");
+  const [groceryItem, setGroceryItem] = useState('');
   const [daysToPurchase, setDaysToPurchase] = useState(null);
 
   const history = useHistory();
@@ -13,7 +13,7 @@ const AddItem = () => {
   };
 
   const sanitizeItemInput = (item) => {
-    return item.replace(/[\W_]+/g, "").toLowerCase();
+    return item.replace(/[\W_]+/g, '').toLowerCase();
   };
 
   const onRadioInputChange = (e) => {
@@ -24,25 +24,25 @@ const AddItem = () => {
     e.preventDefault();
     const alreadyExists = await existingItemCheck(groceryItem);
     if (alreadyExists) {
-      alert("Item already on shoppping list");
+      alert('Item already on shoppping list');
       return;
     }
-    db.collection(localStorage.getItem("token")).add({
+    db.collection(localStorage.getItem('token')).add({
       itemName: groceryItem,
       daysToPurchase: daysToPurchase,
       lastPurchasedDate: null,
     });
 
-    setGroceryItem("");
+    setGroceryItem('');
     setDaysToPurchase(null);
 
-    history.push("/ListView");
+    history.push('/List');
   };
 
   const existingItemCheck = async (item) => {
     let alreadyExists = false;
     await db
-      .collection(localStorage.getItem("token"))
+      .collection(localStorage.getItem('token'))
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

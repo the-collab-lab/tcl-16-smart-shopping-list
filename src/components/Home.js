@@ -3,16 +3,15 @@ import getToken from '../lib/tokens.js';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 
-
 const Home = (props) => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
   const history = useHistory();
 
   const generateToken = () => {
     const token = getToken();
-    localStorage.setItem("token", token);
+    localStorage.setItem('token', token);
     props.setAuth(token);
-    history.push("/ListView");
+    history.push('/List');
   };
 
   const onTokenInputChange = (e) => {
@@ -26,25 +25,25 @@ const Home = (props) => {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          alert("uh oh! list does not exist");
+          alert('uh oh! list does not exist');
         } else {
-          localStorage.setItem("token", token);
+          localStorage.setItem('token', token);
           props.setAuth(token);
-          history.push("/ListView");
+          history.push('/List');
         }
       })
       .catch((error) => {
         alert(error);
       });
 
-    setToken("");
+    setToken('');
   };
 
   return (
     <div className="home">
-      <h1>Welcome to Smart Shopping List!</h1>
+      <h1>Welcome to Smart-Shopper! Let's make a list and start tracking.</h1>
       <button className="new-list-btn" onClick={generateToken}>
-        Create a new list
+        Create new list
       </button>
       <p>- or -</p>
       <p>Join an existing shopping list by entering a three word token.</p>
