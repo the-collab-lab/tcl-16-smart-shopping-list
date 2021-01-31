@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
-import { firestore } from 'firebase';
 
 const ListView = () => {
   const [value, loading, error] = useCollection(
@@ -23,7 +22,7 @@ const ListView = () => {
     }
   };
 
-  const checkIfItemHasBeenPurchased = (lastPurchaseTimestamp) => {
+  const hasItemBeenPurchased = (lastPurchaseTimestamp) => {
     const now = Date.now();
     const oneDay = 24 * 60 * 60 * 1000;
     let isMoreThanADay = false;
@@ -49,7 +48,7 @@ const ListView = () => {
                   name={groceryItem.data().itemName}
                   value={groceryItem.id}
                   onChange={onPurchaseChange}
-                  checked={checkIfItemHasBeenPurchased(
+                  checked={hasItemBeenPurchased(
                     groceryItem.data().lastPurchasedDate,
                   )}
                 ></input>
