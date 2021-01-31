@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../lib/firebase";
 
@@ -14,6 +14,24 @@ const ListView = () => {
     db.collection(localStorage.getItem("token")).doc(id).delete();
   };
 
+  const onPurchaseChange = (e) => {
+    if (e.target.checked) {
+      db.collection(localStorage.getItem("token"))
+        .doc(e.target.value)
+        .update({ lastPurchasedDate: new Date() });
+    }
+  };
+
+  const hasItemBeenPurchased = (lastPurchaseTimestamp) => {
+    const now = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000;
+    let isMoreThanADay = false;
+    if (lastPurchaseTimestamp) {
+      isMoreThanADay = now - lastPurchaseTimestamp.toMillis() < oneDay;
+    }
+    return isMoreThanADay;
+  };
+
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
@@ -23,12 +41,21 @@ const ListView = () => {
         {value && (
           <ul>
             {value.docs.map((groceryItem) => (
-              <li
-                key={groceryItem.id}
-                onClick={() => deleteItemHandler(groceryItem.id)}
-              >
-                {groceryItem.data().itemName}
-              </li>
+              <Fragment key={groceryItem.id}>
+                <input
+                  type="checkbox"
+                  id={groceryItem.data().itemName}
+                  name={groceryItem.data().itemName}
+                  value={groceryItem.id}
+                  onChange={onPurchaseChange}
+                  checked={hasItemBeenPurchased(
+                    groceryItem.data().lastPurchasedDate,
+                  )}
+                ></input>
+                <li onClick={() => deleteItemHandler(groceryItem.id)}>
+                  {groceryItem.data().itemName}
+                </li>
+              </Fragment>
             ))}
           </ul>
         )}
