@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
+import authContext from "../../auth";
 import { db } from "../../lib/firebase";
 
 import EmptyList from "./EmptyList";
 import PopulatedList from "./PopulatedList";
 
 const ListContainer = () => {
-  const [value, loading, error] = useCollection(
-    db.collection(localStorage.getItem("token")),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    },
-  );
+  const userAuthToken = useContext(authContext);
+
+  const [value, loading, error] = useCollection(db.collection(userAuthToken), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
 
   return (
     <>
