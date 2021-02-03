@@ -1,17 +1,56 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
 
 const PopulatedList = () => {
-  const [value, loading, error] = useCollection(
+  const [listData] = useCollection(
     db.collection(localStorage.getItem("token")),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     },
   );
 
+  const [filterValue, setFilterValue] = useState("");
+  const [filteredList, setFilteredList] = useState([]);
+
   const deleteItemHandler = (id) => {
     db.collection(localStorage.getItem("token")).doc(id).delete();
+  };
+
+  useEffect(() => {
+    setFilteredList(listData);
+  }, [filterValue]);
+
+  const onFilterChange = (e) => {
+    setFilterValue(e.target.value);
+    console.log("value", filterValue);
+    if (listData) {
+      let filtered = listData.docs.filter((doc) => {
+        return doc.data().itemName.includes(setFilterValue);
+      });
+
+      setFilteredList(filtered);
+    }
+
+    console.log("filtered list", filteredList);
+
+    // e.persist();
+    // db.collection(localStorage.getItem("token"))
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       if (doc.data().itemName === e.target.value) {
+    //         console.log("word is included", e.target.value);
+    //       } else {
+    //         console.log("not included");
+    //       }
+
+    //       filteredList.filter();
+    //     });
+    //   })
+    //   .catch(function (error) {
+    //     console.log("Error getting documents: ", error);
+    //   });
   };
 
   const onPurchaseChange = (e) => {
@@ -35,12 +74,17 @@ const PopulatedList = () => {
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
+      <input
+        id="itemFilter"
+        name="itemFilter"
+        type="text"
+        placeholder="Filter items..."
+        onChange={onFilterChange}
+      ></input>
       <div>
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
-        {loading && <span>Loading Shopping List...</span>}
-        {value && (
+        {listData && (
           <ul>
-            {value.docs.map((groceryItem) => (
+            {listData.docs.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
                 <input
                   type="checkbox"
