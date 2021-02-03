@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
-import firebase from "firebase/app";
+import calculateEstimate from "../../lib/estimates";
 
 const PopulatedList = () => {
   const [value, loading, error] = useCollection(
@@ -17,11 +17,31 @@ const PopulatedList = () => {
 
   const onPurchaseChange = (e) => {
     if (e.target.checked) {
+      const data = value.docs
+        .filter((item) => item.id === e.target.value)[0]
+        .data();
+
+      let lastInterval;
+      if (data.numberOfPurchases < 1) {
+        lastInterval = null;
+      } else {
+        const lastIntervalMillis =
+          Date.now() - data.lastPurchasedDate.toMillis();
+        const oneDay = 1000 * 60 * 60 * 24;
+        lastInterval = Math.round(lastIntervalMillis / oneDay);
+      }
+
+      const lastEstimate = calculateEstimate(
+        data.daysToPurchase,
+        lastInterval,
+        data.numberOfPurchases + 1,
+      );
       db.collection(localStorage.getItem("token"))
         .doc(e.target.value)
         .update({
           lastPurchasedDate: new Date(),
-          numberOfPurchases: firebase.firestore.FieldValue.increment(1),
+          numberOfPurchases: data.numberOfPurchases + 1,
+          daysToPurchase: lastEstimate,
         });
     }
   };
