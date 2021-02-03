@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
+import firebase from "firebase/app";
 
 const PopulatedList = () => {
   const [value, loading, error] = useCollection(
@@ -18,7 +19,10 @@ const PopulatedList = () => {
     if (e.target.checked) {
       db.collection(localStorage.getItem("token"))
         .doc(e.target.value)
-        .update({ lastPurchasedDate: new Date() });
+        .update({
+          lastPurchasedDate: new Date(),
+          numberOfPurchases: firebase.firestore.FieldValue.increment(1),
+        });
     }
   };
 
