@@ -15,14 +15,10 @@ const PopulatedList = () => {
     db.collection(localStorage.getItem("token")).doc(id).delete();
   };
 
-  const onPurchaseChange = (e) => {
+  const onPurchaseChange = (e, data) => {
     if (e.target.checked) {
-      const data = value.docs
-        .filter((item) => item.id === e.target.value)[0]
-        .data();
-
       let lastInterval;
-      if (data.numberOfPurchases < 1) {
+      if (!data.numberOfPurchases) {
         lastInterval = null;
       } else {
         const lastIntervalMillis =
@@ -71,7 +67,7 @@ const PopulatedList = () => {
                   id={groceryItem.data().itemName}
                   name={groceryItem.data().itemName}
                   value={groceryItem.id}
-                  onChange={onPurchaseChange}
+                  onChange={(e) => onPurchaseChange(e, groceryItem.data())}
                   checked={hasItemBeenPurchased(
                     groceryItem.data().lastPurchasedDate,
                   )}
