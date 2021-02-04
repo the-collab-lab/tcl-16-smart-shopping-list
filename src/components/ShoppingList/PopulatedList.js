@@ -15,28 +15,29 @@ const PopulatedList = () => {
     db.collection(localStorage.getItem("token")).doc(id).delete();
   };
 
-  const onPurchaseChange = (e, data) => {
+  const onPurchaseChange = (e, itemData) => {
     if (e.target.checked) {
       let lastInterval;
-      if (!data.numberOfPurchases) {
+      if (!itemData.numberOfPurchases) {
         lastInterval = null;
       } else {
         const lastIntervalMillis =
-          Date.now() - data.lastPurchasedDate.toMillis();
+          Date.now() - itemData.lastPurchasedDate.toMillis();
         const oneDay = 1000 * 60 * 60 * 24;
         lastInterval = Math.round(lastIntervalMillis / oneDay);
       }
 
       const lastEstimate = calculateEstimate(
-        data.daysToPurchase,
+        itemData.daysToPurchase,
         lastInterval,
-        data.numberOfPurchases + 1,
+        itemData.numberOfPurchases + 1,
       );
+
       db.collection(localStorage.getItem("token"))
         .doc(e.target.value)
         .update({
           lastPurchasedDate: new Date(),
-          numberOfPurchases: data.numberOfPurchases + 1,
+          numberOfPurchases: itemData.numberOfPurchases + 1,
           daysToPurchase: lastEstimate,
         });
     }
