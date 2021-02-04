@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import { db } from "../lib/firebase";
 import { useHistory } from "react-router-dom";
-import authContext from "../auth";
+import { UserContext } from "../App";
 
 const AddItem = () => {
-  const userAuthToken = useContext(authContext);
+  const { db } = useContext(UserContext);
   const [groceryItem, setGroceryItem] = useState("");
   const [daysToPurchase, setDaysToPurchase] = useState(null);
 
@@ -29,7 +28,7 @@ const AddItem = () => {
       alert("Item already on shoppping list");
       return;
     }
-    db.collection(userAuthToken).add({
+    db.add({
       itemName: groceryItem,
       daysToPurchase: daysToPurchase,
       lastPurchasedDate: null,
@@ -44,7 +43,6 @@ const AddItem = () => {
   const existingItemCheck = async (item) => {
     let alreadyExists = false;
     await db
-      .collection(userAuthToken)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

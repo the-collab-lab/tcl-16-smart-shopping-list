@@ -12,15 +12,43 @@ import NotFound from "./components/NotFound";
 import AddItem from "./components/AddItem";
 import ListContainer from "./components/ShoppingList/ListContainer";
 import Home from "./components/Home";
-import { AuthProvider } from "./auth";
+import { db } from "./lib/firebase";
+
+const setToken = (value) => {
+  localStorage.setItem("token", value);
+};
+
+const userStore = {
+  token: localStorage.getItem("token"),
+  db: null,
+  setToken,
+};
+
+// Setup the app
+window.addEventListener("storage", (e) => onTokenChange(e.newValue));
+
+if (userStore.token) {
+  const database = db.collection(userStore.token);
+  database.onSnapShot((querySnapshot) => {
+    userStore.db = querySnapshot;
+  });
+}
+
+const onTokenChange = (token) => {
+  userStore.token = token;
+  const database = db.collection(token);
+  database.onSnapShot((querySnapshot) => {
+    userStore.db = querySnapshot;
+  });
+};
+
+export const UserContext = React.createContext(userStore);
 
 const App = () => {
-  const [auth, setAuth] = useState(localStorage.getItem("token"));
-
   return (
-    <AuthProvider value={auth}>
+    <UserContext.Provider>
       <Router>
-        {auth ? (
+        {userStore.token ? (
           <div className="App">
             <MenuLink activeWhenExact={true} pathTo="/List" label="List View" />
             <MenuLink pathTo="/AddItem" label="Add Item" />
@@ -38,10 +66,10 @@ const App = () => {
             </Switch>
           </div>
         ) : (
-          <Home setAuth={setAuth} />
+          <Home setAuth={setToken} />
         )}
       </Router>
-    </AuthProvider>
+    </UserContext.Provider>
   );
 };
 

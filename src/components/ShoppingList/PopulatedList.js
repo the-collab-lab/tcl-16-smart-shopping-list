@@ -1,23 +1,20 @@
 import React, { Fragment, useContext } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../../lib/firebase";
-import authContext from "../../auth";
+import UserContext from "../../App";
 
 const PopulatedList = () => {
-  const userAuthToken = useContext(authContext);
-  const [value, loading, error] = useCollection(db.collection(userAuthToken), {
+  const { db } = useContext(UserContext);
+  const [value, loading, error] = useCollection(db, {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
 
   const deleteItemHandler = (id) => {
-    db.collection(userAuthToken).doc(id).delete();
+    db.doc(id).delete();
   };
 
   const onPurchaseChange = (e) => {
     if (e.target.checked) {
-      db.collection(userAuthToken)
-        .doc(e.target.value)
-        .update({ lastPurchasedDate: new Date() });
+      db.doc(e.target.value).update({ lastPurchasedDate: new Date() });
     }
   };
 
