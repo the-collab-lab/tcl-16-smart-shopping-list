@@ -65,6 +65,7 @@ const PopulatedList = () => {
         name="itemFilter"
         type="text"
         placeholder="Filter items..."
+        value={filterValue}
         onChange={onFilterChange}
       />
       {filterValue !== "" && (
