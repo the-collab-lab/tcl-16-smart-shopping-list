@@ -13,44 +13,25 @@ const PopulatedList = () => {
   const [filterValue, setFilterValue] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
-  const deleteItemHandler = (id) => {
-    db.collection(localStorage.getItem("token")).doc(id).delete();
+  const onFilterChange = (e) => {
+    setFilterValue(e.target.value);
   };
 
   useEffect(() => {
-    setFilteredList(listData);
-  }, [filterValue]);
-
-  const onFilterChange = (e) => {
-    setFilterValue(e.target.value);
-    console.log("value", filterValue);
     if (listData) {
       let filtered = listData.docs.filter((doc) => {
-        return doc.data().itemName.includes(setFilterValue);
+        console.log("doc", doc.data().itemName.toLowerCase());
+        return doc.data().itemName.includes(filterValue.toLowerCase());
       });
 
       setFilteredList(filtered);
     }
+  }, [filterValue, listData]);
 
-    console.log("filtered list", filteredList);
+  console.log("filtered list", filteredList);
 
-    // e.persist();
-    // db.collection(localStorage.getItem("token"))
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //       if (doc.data().itemName === e.target.value) {
-    //         console.log("word is included", e.target.value);
-    //       } else {
-    //         console.log("not included");
-    //       }
-
-    //       filteredList.filter();
-    //     });
-    //   })
-    //   .catch(function (error) {
-    //     console.log("Error getting documents: ", error);
-    //   });
+  const deleteItemHandler = (id) => {
+    db.collection(localStorage.getItem("token")).doc(id).delete();
   };
 
   const onPurchaseChange = (e) => {
