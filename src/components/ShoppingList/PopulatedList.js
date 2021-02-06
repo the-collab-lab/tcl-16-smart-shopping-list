@@ -13,22 +13,26 @@ const PopulatedList = () => {
   const [filterValue, setFilterValue] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
-  const onFilterChange = (e) => {
-    setFilterValue(e.target.value);
-  };
-
   useEffect(() => {
     if (listData) {
       let filtered = listData.docs.filter((doc) => {
-        console.log("doc", doc.data().itemName.toLowerCase());
-        return doc.data().itemName.includes(filterValue.toLowerCase());
+        return doc
+          .data()
+          .itemName.toLowerCase()
+          .includes(filterValue.toLowerCase());
       });
 
       setFilteredList(filtered);
     }
   }, [filterValue, listData]);
 
-  console.log("filtered list", filteredList);
+  const onFilterChange = (e) => {
+    setFilterValue(e.target.value);
+  };
+
+  const resetFilter = () => {
+    setFilterValue("");
+  };
 
   const deleteItemHandler = (id) => {
     db.collection(localStorage.getItem("token")).doc(id).delete();
@@ -56,16 +60,22 @@ const PopulatedList = () => {
     <div className="shopping-list">
       <h1>Shopping List</h1>
       <input
+        aria-label="Filter Items"
         id="itemFilter"
         name="itemFilter"
         type="text"
         placeholder="Filter items..."
         onChange={onFilterChange}
-      ></input>
+      />
+      {filterValue !== "" && (
+        <button aria-label="Clear filter" onClick={resetFilter}>
+          X
+        </button>
+      )}
       <div>
         {listData && (
           <ul>
-            {listData.docs.map((groceryItem) => (
+            {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
                 <input
                   type="checkbox"
