@@ -1,15 +1,39 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
 import calculateEstimate from "../../lib/estimates";
 
 const PopulatedList = () => {
-  const [value, loading, error] = useCollection(
+  const [listData] = useCollection(
     db.collection(localStorage.getItem("token")),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     },
   );
+
+  const [filterValue, setFilterValue] = useState("");
+  const [filteredList, setFilteredList] = useState([]);
+
+  useEffect(() => {
+    if (listData) {
+      let filtered = listData.docs.filter((doc) => {
+        return doc
+          .data()
+          .itemName.toLowerCase()
+          .includes(filterValue.toLowerCase());
+      });
+
+      setFilteredList(filtered);
+    }
+  }, [filterValue, listData]);
+
+  const onFilterChange = (e) => {
+    setFilterValue(e.target.value);
+  };
+
+  const resetFilter = () => {
+    setFilterValue("");
+  };
 
   const deleteItemHandler = (id) => {
     db.collection(localStorage.getItem("token")).doc(id).delete();
@@ -56,12 +80,24 @@ const PopulatedList = () => {
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
+      <input
+        aria-label="Filter Items"
+        id="itemFilter"
+        name="itemFilter"
+        type="text"
+        placeholder="Filter items..."
+        value={filterValue}
+        onChange={onFilterChange}
+      />
+      {filterValue !== "" && (
+        <button aria-label="Clear filter" onClick={resetFilter}>
+          X
+        </button>
+      )}
       <div>
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
-        {loading && <span>Loading Shopping List...</span>}
-        {value && (
+        {listData && (
           <ul>
-            {value.docs.map((groceryItem) => (
+            {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
                 <input
                   type="checkbox"
