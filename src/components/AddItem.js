@@ -36,8 +36,6 @@ const AddItem = () => {
 
     setGroceryItem("");
     setDaysToPurchase(null);
-
-    history.push("/List");
   };
 
   const existingItemCheck = async (item) => {
