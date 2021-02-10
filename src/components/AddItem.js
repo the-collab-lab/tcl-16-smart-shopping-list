@@ -6,8 +6,6 @@ const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
   const [daysToPurchase, setDaysToPurchase] = useState(null);
 
-  const history = useHistory();
-
   const onGroceryItemInputChange = (e) => {
     setGroceryItem(e.target.value);
   };
