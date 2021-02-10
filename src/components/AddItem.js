@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { db } from "../lib/firebase";
-import { useHistory } from "react-router-dom";
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
