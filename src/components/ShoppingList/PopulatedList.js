@@ -5,7 +5,10 @@ import calculateEstimate from "../../lib/estimates";
 
 const PopulatedList = () => {
   const [listData] = useCollection(
-    db.collection(localStorage.getItem("token")),
+    db
+      .collection(localStorage.getItem("token"))
+      .orderBy("daysToPurchase")
+      .orderBy("itemName"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     },
@@ -77,6 +80,19 @@ const PopulatedList = () => {
     return isMoreThanADay;
   };
 
+  // function getClassName(lastPurchasedDate, daysToPurchase) {
+  //   const daysElapsed = Math.floor(
+  //     (Date.now() - lastPurchasedDate.toMillis()) / (24 * 60 * 60 * 1000),
+  //   );
+  //   const daysUntilPurchase = daysToPurchase - daysElapsed;
+
+  //   if (daysElapsed > 2 * daysToPurchase || !lastPurchasedDate)
+  //     return "inactive";
+  //   if (daysUntilPurchase < 7) return "soon";
+  //   if (daysUntilPurchase >= 7 && daysUntilPurchase <= 30) return "kinda-soon";
+  //   if (daysToPurchase > 30) return "not-soon";
+  // }
+
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
@@ -98,7 +114,13 @@ const PopulatedList = () => {
         {listData && (
           <ul>
             {filteredList.map((groceryItem) => (
-              <Fragment key={groceryItem.id}>
+              <Fragment
+                key={groceryItem.id}
+                // className={getClassName(
+                //   groceryItem.data().lastPurchasedDate,
+                //   groceryItem.data().daysToPurchase,
+                // )}
+              >
                 <input
                   type="checkbox"
                   id={groceryItem.data().itemName}
