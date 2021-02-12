@@ -151,6 +151,13 @@ const PopulatedList = () => {
           <ul>
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
+                <p
+                  // onClick={() => deleteItemHandler(groceryItem.id)}
+                  className={getClassName(groceryItem)}
+                  aria-label="Item name and days to purchase"
+                >
+                  {groceryItem.itemName} - {groceryItem.daysToPurchase} days
+                </p>
                 <label>
                   Purchased?{" "}
                   <input
@@ -165,13 +172,6 @@ const PopulatedList = () => {
                     )}
                   />
                 </label>
-                <li
-                  // onClick={() => deleteItemHandler(groceryItem.id)}
-                  className={getClassName(groceryItem)}
-                  aria-label="Grocery Item to be purchased."
-                >
-                  {groceryItem.itemName} - {groceryItem.daysToPurchase}
-                </li>
               </Fragment>
             ))}
           </ul>
