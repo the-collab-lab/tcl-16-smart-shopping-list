@@ -63,9 +63,9 @@ const PopulatedList = () => {
     setFilterValue("");
   };
 
-  const deleteItemHandler = (id) => {
-    db.collection(localStorage.getItem("token")).doc(id).delete();
-  };
+  // const deleteItemHandler = (id) => {
+  //   db.collection(localStorage.getItem("token")).doc(id).delete();
+  // };
 
   const onPurchaseChange = (e, itemData) => {
     if (e.target.checked) {
@@ -131,15 +131,17 @@ const PopulatedList = () => {
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
-      <input
-        aria-label="Filter Items"
-        id="itemFilter"
-        name="itemFilter"
-        type="text"
-        placeholder="Filter items..."
-        value={filterValue}
-        onChange={onFilterChange}
-      />
+      <label>
+        Filter items:{" "}
+        <input
+          aria-label="Filter Items"
+          id="itemFilter"
+          name="itemFilter"
+          type="text"
+          value={filterValue}
+          onChange={onFilterChange}
+        />
+      </label>
       {filterValue !== "" && (
         <button aria-label="Clear filter" onClick={resetFilter}>
           X
@@ -152,18 +154,24 @@ const PopulatedList = () => {
             our simple array rather than .doc.data() etc */}
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
-                <input
-                  type="checkbox"
-                  id={groceryItem.itemName}
-                  name={groceryItem.itemName}
-                  value={groceryItem.id}
-                  onChange={(e) => onPurchaseChange(e, groceryItem)}
-                  checked={hasItemBeenPurchased(groceryItem.lastPurchasedDate)}
-                ></input>
+                <label>
+                  Purchased?{" "}
+                  <input
+                    aria-label="Purchased?"
+                    type="checkbox"
+                    id={groceryItem.itemName}
+                    name={groceryItem.itemName}
+                    value={groceryItem.id}
+                    onChange={(e) => onPurchaseChange(e, groceryItem)}
+                    checked={hasItemBeenPurchased(
+                      groceryItem.lastPurchasedDate,
+                    )}
+                  />
+                </label>
                 <li
-                  onClick={() => deleteItemHandler(groceryItem.id)}
+                  // onClick={() => deleteItemHandler(groceryItem.id)}
                   className={getClassName(groceryItem)}
-                  aria-labelledby="{groceryItem.itemName} should be bought on {groceryItem.daysToPurchase}"
+                  aria-label="Grocery Item to be purchased."
                 >
                   {groceryItem.itemName} - {groceryItem.daysToPurchase}
                 </li>
