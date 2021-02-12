@@ -6,8 +6,9 @@ import calculateEstimate from "../../lib/estimates";
 const PopulatedList = () => {
   const [listData] = useCollection(
     db
+
+      // Sort in alphabetical order from DB
       .collection(localStorage.getItem("token"))
-      .orderBy("daysToPurchase")
       .orderBy("itemName"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
@@ -19,11 +20,35 @@ const PopulatedList = () => {
 
   useEffect(() => {
     if (listData) {
-      let filtered = listData.docs.filter((doc) => {
-        return doc
-          .data()
-          .itemName.toLowerCase()
-          .includes(filterValue.toLowerCase());
+      // Iterate over firestore obj - need to save doc ID as a key in new obj
+      // Save each firestore object as a regular object in our own array
+      let list = [];
+      listData.docs.map((doc) => {
+        let docObj = doc.data();
+        docObj.id = doc.id;
+        list.push(docObj);
+      });
+
+      // Map over new array and calculate days until next purchase for each item
+      // Set as new property on object (only saved in our app - not in db)
+      list.map((doc) => {
+        doc.daysUntilPurchase = calculateDaysTilNextPurchase(doc);
+      });
+
+      // Sort by days until next purchase
+      // The if/else ensures that 'null' (inactive) items will always be at bottom - thanks stackoverflow
+      list.sort(function (a, b) {
+        if (a.daysUntilPurchase === null) {
+          return 1;
+        } else if (b.daysUntilPurchase === null) {
+          return -1;
+        }
+        return a.daysUntilPurchase < b.daysUntilPurchase ? -1 : 1;
+      });
+
+      // Run filter on our new list and set state using this list
+      let filtered = list.filter((doc) => {
+        return doc.itemName.toLowerCase().includes(filterValue.toLowerCase());
       });
 
       setFilteredList(filtered);
@@ -61,7 +86,7 @@ const PopulatedList = () => {
       );
 
       db.collection(localStorage.getItem("token"))
-        .doc(e.target.value)
+        .doc(itemData.id)
         .update({
           lastPurchasedDate: new Date(),
           numberOfPurchases: itemData.numberOfPurchases + 1,
@@ -80,18 +105,28 @@ const PopulatedList = () => {
     return isMoreThanADay;
   };
 
-  // function getClassName(lastPurchasedDate, daysToPurchase) {
-  //   const daysElapsed = Math.floor(
-  //     (Date.now() - lastPurchasedDate.toMillis()) / (24 * 60 * 60 * 1000),
-  //   );
-  //   const daysUntilPurchase = daysToPurchase - daysElapsed;
+  function calculateDaysTilNextPurchase(itemObj) {
+    if (!itemObj.lastPurchasedDate) return null;
+    const daysElapsed = Math.floor(
+      (Date.now() - itemObj.lastPurchasedDate.toMillis()) /
+        (24 * 60 * 60 * 1000),
+    );
+    if (daysElapsed > 2 * itemObj.daysToPurchase) return null;
+    const daysUntilPurchase = itemObj.daysToPurchase - daysElapsed;
+    return daysUntilPurchase;
+  }
 
-  //   if (daysElapsed > 2 * daysToPurchase || !lastPurchasedDate)
-  //     return "inactive";
-  //   if (daysUntilPurchase < 7) return "soon";
-  //   if (daysUntilPurchase >= 7 && daysUntilPurchase <= 30) return "kinda-soon";
-  //   if (daysToPurchase > 30) return "not-soon";
-  // }
+  function getClassName(itemObj) {
+    if (itemObj.daysUntilPurchase === null) {
+      return "inactive";
+    } else if (itemObj.daysUntilPurchase < 7) {
+      return "soon";
+    } else if (itemObj.daysUntilPurchase < 30) {
+      return "kinda-soon";
+    } else {
+      return "not-soon";
+    }
+  }
 
   return (
     <div className="shopping-list">
@@ -113,26 +148,23 @@ const PopulatedList = () => {
       <div>
         {listData && (
           <ul>
+            {/* All of these methods have been updated so we're just iterating over
+            our simple array rather than .doc.data() etc */}
             {filteredList.map((groceryItem) => (
-              <Fragment
-                key={groceryItem.id}
-                // className={getClassName(
-                //   groceryItem.data().lastPurchasedDate,
-                //   groceryItem.data().daysToPurchase,
-                // )}
-              >
+              <Fragment key={groceryItem.id}>
                 <input
                   type="checkbox"
-                  id={groceryItem.data().itemName}
-                  name={groceryItem.data().itemName}
+                  id={groceryItem.itemName}
+                  name={groceryItem.itemName}
                   value={groceryItem.id}
-                  onChange={(e) => onPurchaseChange(e, groceryItem.data())}
-                  checked={hasItemBeenPurchased(
-                    groceryItem.data().lastPurchasedDate,
-                  )}
+                  onChange={(e) => onPurchaseChange(e, groceryItem)}
+                  checked={hasItemBeenPurchased(groceryItem.lastPurchasedDate)}
                 ></input>
-                <li onClick={() => deleteItemHandler(groceryItem.id)}>
-                  {groceryItem.data().itemName}
+                <li
+                  onClick={() => deleteItemHandler(groceryItem.id)}
+                  className={getClassName(groceryItem)}
+                >
+                  {groceryItem.itemName}
                 </li>
               </Fragment>
             ))}
