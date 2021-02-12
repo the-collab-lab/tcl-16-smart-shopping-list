@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { db } from "../lib/firebase";
+import swal from "@sweetalert/with-react";
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
@@ -33,6 +34,12 @@ const AddItem = () => {
 
     setGroceryItem("");
     setDaysToPurchase(null);
+
+    swal("Item added!", {
+      icon: "success",
+      buttons: false,
+      timer: 500,
+    });
   };
 
   const existingItemCheck = async (item) => {
