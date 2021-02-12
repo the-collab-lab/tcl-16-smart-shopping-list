@@ -9,7 +9,7 @@ const PopulatedList = () => {
 
       // Sort in alphabetical order from DB
       .collection(localStorage.getItem("token"))
-      .orderBy("itemName"),
+      .orderBy("itemName", "desc"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     },
@@ -163,8 +163,9 @@ const PopulatedList = () => {
                 <li
                   onClick={() => deleteItemHandler(groceryItem.id)}
                   className={getClassName(groceryItem)}
+                  aria-labelledby="{groceryItem.itemName} should be bought on {groceryItem.daysToPurchase}"
                 >
-                  {groceryItem.itemName}
+                  {groceryItem.itemName} - {groceryItem.daysToPurchase}
                 </li>
               </Fragment>
             ))}
