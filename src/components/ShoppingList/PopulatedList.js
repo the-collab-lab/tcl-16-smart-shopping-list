@@ -32,21 +32,20 @@ const PopulatedList = () => {
       // Map over new array and calculate days until next purchase for each item
       // Set as new property on object (only saved in our app - not in db)
       list.map((doc) => {
-        doc.daysUntilPurchase = calculateDaysTilNextPurchase(doc);
+        doc.purchaseCountdown = calculateDaysTilNextPurchase(doc);
       });
 
       // Sort by days until next purchase
-      // The if/else ensures that 'null' (inactive) items will always be at bottom - thanks stackoverflow
+      // The if/else ensures that 'null' (inactive) items will always be at bottom
       list.sort(function (a, b) {
-        if (a.daysUntilPurchase === null) {
+        if (a.purchaseCountdown === null) {
           return 1;
-        } else if (b.daysUntilPurchase === null) {
+        } else if (b.purchaseCountdown === null) {
           return -1;
         }
-        return a.daysUntilPurchase < b.daysUntilPurchase ? -1 : 1;
+        return a.purchaseCountdown < b.purchaseCountdown ? -1 : 1;
       });
 
-      // Run filter on our new list and set state using this list
       let filtered = list.filter((doc) => {
         return doc.itemName.toLowerCase().includes(filterValue.toLowerCase());
       });
@@ -112,16 +111,16 @@ const PopulatedList = () => {
         (24 * 60 * 60 * 1000),
     );
     if (daysElapsed > 2 * itemObj.daysToPurchase) return null;
-    const daysUntilPurchase = itemObj.daysToPurchase - daysElapsed;
-    return daysUntilPurchase;
+    const purchaseCountdown = itemObj.daysToPurchase - daysElapsed;
+    return purchaseCountdown;
   }
 
   function getClassName(itemObj) {
-    if (itemObj.daysUntilPurchase === null) {
+    if (itemObj.purchaseCountdown === null) {
       return "inactive";
-    } else if (itemObj.daysUntilPurchase < 7) {
+    } else if (itemObj.purchaseCountdown < 7) {
       return "soon";
-    } else if (itemObj.daysUntilPurchase < 30) {
+    } else if (itemObj.purchaseCountdown < 30) {
       return "kinda-soon";
     } else {
       return "not-soon";
@@ -150,8 +149,6 @@ const PopulatedList = () => {
       <div>
         {listData && (
           <ul>
-            {/* All of these methods have been updated so we're just iterating over
-            our simple array rather than .doc.data() etc */}
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
                 <label>
