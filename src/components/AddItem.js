@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { db } from "../lib/firebase";
-import { useHistory } from "react-router-dom";
+import swal from "@sweetalert/with-react";
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
   const [daysToPurchase, setDaysToPurchase] = useState(null);
-
-  const history = useHistory();
 
   const onGroceryItemInputChange = (e) => {
     setGroceryItem(e.target.value);
@@ -37,7 +35,11 @@ const AddItem = () => {
     setGroceryItem("");
     setDaysToPurchase(null);
 
-    history.push("/List");
+    swal("Item added!", {
+      icon: "success",
+      buttons: false,
+      timer: 500,
+    });
   };
 
   const existingItemCheck = async (item) => {

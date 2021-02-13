@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
 import calculateEstimate from "../../lib/estimates";
+import swal from "@sweetalert/with-react";
 
 const PopulatedList = () => {
   const [listData] = useCollection(
@@ -36,7 +37,20 @@ const PopulatedList = () => {
   };
 
   const deleteItemHandler = (id) => {
-    db.collection(localStorage.getItem("token")).doc(id).delete();
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you cannot revert back.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        db.collection(localStorage.getItem("token")).doc(id).delete();
+        swal("Item deleted!", {
+          icon: "success",
+        });
+      }
+    });
   };
 
   const onPurchaseChange = (e, itemData) => {
@@ -109,8 +123,11 @@ const PopulatedList = () => {
                     groceryItem.data().lastPurchasedDate,
                   )}
                 ></input>
-                <li onClick={() => deleteItemHandler(groceryItem.id)}>
+                <li>
                   {groceryItem.data().itemName}
+                  <button onClick={() => deleteItemHandler(groceryItem.id)}>
+                    Delete
+                  </button>
                 </li>
               </Fragment>
             ))}
