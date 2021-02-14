@@ -6,7 +6,11 @@ import swal from "@sweetalert/with-react";
 
 const PopulatedList = () => {
   const [listData] = useCollection(
-    db.collection(localStorage.getItem("token")),
+    db
+
+      // Sort in alphabetical order from DB
+      .collection(localStorage.getItem("token"))
+      .orderBy("itemName", "desc"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     },
@@ -17,11 +21,34 @@ const PopulatedList = () => {
 
   useEffect(() => {
     if (listData) {
-      let filtered = listData.docs.filter((doc) => {
-        return doc
-          .data()
-          .itemName.toLowerCase()
-          .includes(filterValue.toLowerCase());
+      // Iterate over firestore obj - need to save doc ID as a key in new obj
+      // Save each firestore object as a regular object in our own array
+      let list = [];
+      listData.docs.map((doc) => {
+        let docObj = doc.data();
+        docObj.id = doc.id;
+        list.push(docObj);
+      });
+
+      // Map over new array and calculate days until next purchase for each item
+      // Set as new property on object (only saved in our app - not in db)
+      list.map((doc) => {
+        doc.purchaseCountdown = calculateDaysTilNextPurchase(doc);
+      });
+
+      // Sort by days until next purchase
+      // The if/else ensures that 'null' (inactive) items will always be at bottom
+      list.sort(function (a, b) {
+        if (a.purchaseCountdown === null) {
+          return 1;
+        } else if (b.purchaseCountdown === null) {
+          return -1;
+        }
+        return a.purchaseCountdown < b.purchaseCountdown ? -1 : 1;
+      });
+
+      let filtered = list.filter((doc) => {
+        return doc.itemName.toLowerCase().includes(filterValue.toLowerCase());
       });
 
       setFilteredList(filtered);
@@ -72,7 +99,7 @@ const PopulatedList = () => {
       );
 
       db.collection(localStorage.getItem("token"))
-        .doc(e.target.value)
+        .doc(itemData.id)
         .update({
           lastPurchasedDate: new Date(),
           numberOfPurchases: itemData.numberOfPurchases + 1,
@@ -91,18 +118,51 @@ const PopulatedList = () => {
     return isMoreThanADay;
   };
 
+  function calculateDaysTilNextPurchase(itemObj) {
+    if (!itemObj.lastPurchasedDate) return null;
+    const daysElapsed = Math.floor(
+      (Date.now() - itemObj.lastPurchasedDate.toMillis()) /
+        (24 * 60 * 60 * 1000),
+    );
+    if (daysElapsed > 2 * itemObj.daysToPurchase) return null;
+    const purchaseCountdown = itemObj.daysToPurchase - daysElapsed;
+    return purchaseCountdown;
+  }
+
+  function getClassName(itemObj) {
+    if (itemObj.purchaseCountdown === null) {
+      return "inactive";
+    } else if (itemObj.purchaseCountdown < 7) {
+      return "soon";
+    } else if (itemObj.purchaseCountdown < 30) {
+      return "kinda-soon";
+    } else {
+      return "not-soon";
+    }
+  }
+
+  const itemCard = {
+    margin: "10px",
+    padding: "10px",
+    border: "1px solid black",
+    display: "flex",
+    flexDirection: "column",
+  };
+
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
-      <input
-        aria-label="Filter Items"
-        id="itemFilter"
-        name="itemFilter"
-        type="text"
-        placeholder="Filter items..."
-        value={filterValue}
-        onChange={onFilterChange}
-      />
+      <label>
+        Filter items:{" "}
+        <input
+          aria-label="Filter Items"
+          id="itemFilter"
+          name="itemFilter"
+          type="text"
+          value={filterValue}
+          onChange={onFilterChange}
+        />
+      </label>
       {filterValue !== "" && (
         <button aria-label="Clear filter" onClick={resetFilter}>
           X
@@ -113,22 +173,28 @@ const PopulatedList = () => {
           <ul>
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
-                <input
-                  type="checkbox"
-                  id={groceryItem.data().itemName}
-                  name={groceryItem.data().itemName}
-                  value={groceryItem.id}
-                  onChange={(e) => onPurchaseChange(e, groceryItem.data())}
-                  checked={hasItemBeenPurchased(
-                    groceryItem.data().lastPurchasedDate,
-                  )}
-                ></input>
-                <li>
-                  {groceryItem.data().itemName}
+                <div style={itemCard} className={getClassName(groceryItem)}>
+                  <text aria-label="Item name and days to purchase">
+                    {groceryItem.itemName} - {groceryItem.daysToPurchase} days
+                  </text>
+                  <label>
+                    Purchased?{" "}
+                    <input
+                      aria-label="Purchased?"
+                      type="checkbox"
+                      id={groceryItem.itemName}
+                      name={groceryItem.itemName}
+                      value={groceryItem.id}
+                      onChange={(e) => onPurchaseChange(e, groceryItem)}
+                      checked={hasItemBeenPurchased(
+                        groceryItem.lastPurchasedDate,
+                      )}
+                    />{" "}
+                  </label>
                   <button onClick={() => deleteItemHandler(groceryItem.id)}>
                     Delete
                   </button>
-                </li>
+                </div>
               </Fragment>
             ))}
           </ul>

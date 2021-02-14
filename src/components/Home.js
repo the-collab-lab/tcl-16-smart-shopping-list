@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import getToken from '../lib/tokens.js';
-import { useHistory } from 'react-router-dom';
-import { db } from '../lib/firebase';
+import React, { useState } from "react";
+import getToken from "../lib/tokens.js";
+import { useHistory } from "react-router-dom";
+import { db } from "../lib/firebase";
 
 const Home = (props) => {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
   const history = useHistory();
 
   const generateToken = () => {
     const token = getToken();
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     props.setAuth(token);
-    history.push('/List');
+    history.push("/List");
   };
 
   const onTokenInputChange = (e) => {
@@ -25,18 +25,18 @@ const Home = (props) => {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          alert('uh oh! list does not exist');
+          alert("uh oh! list does not exist");
         } else {
-          localStorage.setItem('token', token);
+          localStorage.setItem("token", token);
           props.setAuth(token);
-          history.push('/List');
+          history.push("/List");
         }
       })
       .catch((error) => {
         alert(error);
       });
 
-    setToken('');
+    setToken("");
   };
 
   return (
