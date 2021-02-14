@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
 import calculateEstimate from "../../lib/estimates";
+import swal from "@sweetalert/with-react";
 
 const PopulatedList = () => {
   const [listData] = useCollection(
@@ -62,9 +63,22 @@ const PopulatedList = () => {
     setFilterValue("");
   };
 
-  // const deleteItemHandler = (id) => {
-  //   db.collection(localStorage.getItem("token")).doc(id).delete();
-  // };
+  const deleteItemHandler = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you cannot revert back.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        db.collection(localStorage.getItem("token")).doc(id).delete();
+        swal("Item deleted!", {
+          icon: "success",
+        });
+      }
+    });
+  };
 
   const onPurchaseChange = (e, itemData) => {
     if (e.target.checked) {
@@ -127,6 +141,14 @@ const PopulatedList = () => {
     }
   }
 
+  const itemCard = {
+    margin: "10px",
+    padding: "10px",
+    border: "1px solid black",
+    display: "flex",
+    flexDirection: "column",
+  };
+
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
@@ -151,27 +173,28 @@ const PopulatedList = () => {
           <ul>
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
-                <p
-                  // onClick={() => deleteItemHandler(groceryItem.id)}
-                  className={getClassName(groceryItem)}
-                  aria-label="Item name and days to purchase"
-                >
-                  {groceryItem.itemName} - {groceryItem.daysToPurchase} days
-                </p>
-                <label>
-                  Purchased?{" "}
-                  <input
-                    aria-label="Purchased?"
-                    type="checkbox"
-                    id={groceryItem.itemName}
-                    name={groceryItem.itemName}
-                    value={groceryItem.id}
-                    onChange={(e) => onPurchaseChange(e, groceryItem)}
-                    checked={hasItemBeenPurchased(
-                      groceryItem.lastPurchasedDate,
-                    )}
-                  />
-                </label>
+                <div style={itemCard} className={getClassName(groceryItem)}>
+                  <text aria-label="Item name and days to purchase">
+                    {groceryItem.itemName} - {groceryItem.daysToPurchase} days
+                  </text>
+                  <label>
+                    Purchased?{" "}
+                    <input
+                      aria-label="Purchased?"
+                      type="checkbox"
+                      id={groceryItem.itemName}
+                      name={groceryItem.itemName}
+                      value={groceryItem.id}
+                      onChange={(e) => onPurchaseChange(e, groceryItem)}
+                      checked={hasItemBeenPurchased(
+                        groceryItem.lastPurchasedDate,
+                      )}
+                    />{" "}
+                  </label>
+                  <button onClick={() => deleteItemHandler(groceryItem.id)}>
+                    Delete
+                  </button>
+                </div>
               </Fragment>
             ))}
           </ul>
