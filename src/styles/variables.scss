@@ -1,0 +1,53 @@
+// variables
+
+// fonts
+$roboto: "Roboto", sans-serif;
+$open-sans: "Open Sans", sans-serif;
+
+// colours
+$primary-color: #bf2603;
+$accent-color: #ff8327;
+$bg-color: #111010;
+
+// Breakpoints
+
+/* Portrait tablet and small desktops */
+$desktop: 940px;
+/* Landscape phone to portrait tablet */
+$tablet: 768px;
+/* Landscape phones and down */
+$mobile: 480px;
+
+// mixins
+
+// font style for body
+@mixin primary-font($size) {
+  font-size: $size;
+  font-family: $open-sans;
+  font-weight: 400;
+}
+
+// font style for headings
+@mixin secondary-font($size) {
+  font-size: $size;
+  font-family: $roboto;
+  font-weight: 700;
+}
+
+@mixin minScreen($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin maxScreen($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+p {
+  @include primary-font(16px);
+  line-height: 30px;
+  letter-spacing: 1.9px;
+}

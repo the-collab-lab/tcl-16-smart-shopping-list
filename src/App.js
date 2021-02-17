@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.scss";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   useRouteMatch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import NotFound from './components/NotFound';
-import AddItem from './components/AddItem';
-import ListContainer from './components/ShoppingList/ListContainer';
-import Home from './components/Home';
+import NotFound from "./components/NotFound";
+import AddItem from "./components/AddItem";
+import ListContainer from "./components/ShoppingList/ListContainer";
+import Home from "./components/Home";
 
 const App = () => {
-  const [auth, setAuth] = useState(localStorage.getItem('token'));
+  const [auth, setAuth] = useState(localStorage.getItem("token"));
 
   return (
     <Router>
@@ -49,7 +49,7 @@ const MenuLink = ({ label, pathTo, activeWhenExact = false }) => {
   });
 
   return (
-    <div className={match ? 'active' : ''}>
+    <div className={match ? "active" : ""}>
       <Link to={pathTo}>{label}</Link>
     </div>
   );
