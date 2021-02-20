@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap");
+@import "./normalize.scss";
+@import "./variables.scss";
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @include primary-font(16px);
+}
+
+h1 {
+  @include secondary-font(30px);
+}
+
+// button styles
+button,
+input[type="submit"] {
+  background-color: $red-orange;
+  color: $white;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 20px;
+}
+
+// text input styles
+input[type="text"] {
+  border-radius: 15px;
+}

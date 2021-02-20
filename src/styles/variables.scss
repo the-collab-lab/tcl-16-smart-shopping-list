@@ -1,13 +1,15 @@
 // variables
 
 // fonts
-$roboto: "Roboto", sans-serif;
-$open-sans: "Open Sans", sans-serif;
+$lato: "Lato", sans-serif;
+$merriweather: "Merriweather", serif;
 
 // colours
-$primary-color: #bf2603;
-$accent-color: #ff8327;
-$bg-color: #111010;
+$red-orange: #fc2e20;
+$orange: #fd7f20;
+$amber: #fdb750;
+$black: #010100;
+$white: #fff;
 
 // Breakpoints
 
@@ -23,14 +25,14 @@ $mobile: 480px;
 // font style for body
 @mixin primary-font($size) {
   font-size: $size;
-  font-family: $open-sans;
+  font-family: $merriweather;
   font-weight: 400;
 }
 
 // font style for headings
 @mixin secondary-font($size) {
   font-size: $size;
-  font-family: $roboto;
+  font-family: $lato;
   font-weight: 700;
 }
 
@@ -44,10 +46,4 @@ $mobile: 480px;
   @media screen and (max-width: $size) {
     @content;
   }
-}
-
-p {
-  @include primary-font(16px);
-  line-height: 30px;
-  letter-spacing: 1.9px;
 }
