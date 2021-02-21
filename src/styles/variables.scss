@@ -1,0 +1,49 @@
+// variables
+
+// fonts
+$lato: "Lato", sans-serif;
+$merriweather: "Merriweather", serif;
+
+// colours
+$red-orange: #fc2e20;
+$orange: #fd7f20;
+$amber: #fdb750;
+$black: #010100;
+$white: #fff;
+
+// Breakpoints
+
+/* Portrait tablet and small desktops */
+$desktop: 940px;
+/* Landscape phone to portrait tablet */
+$tablet: 768px;
+/* Landscape phones and down */
+$mobile: 480px;
+
+// mixins
+
+// font style for body
+@mixin primary-font($size) {
+  font-size: $size;
+  font-family: $merriweather;
+  font-weight: 400;
+}
+
+// font style for headings
+@mixin secondary-font($size) {
+  font-size: $size;
+  font-family: $lato;
+  font-weight: 700;
+}
+
+@mixin minScreen($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin maxScreen($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
