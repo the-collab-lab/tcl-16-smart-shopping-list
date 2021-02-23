@@ -174,9 +174,9 @@ const PopulatedList = () => {
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
                 <div style={itemCard} className={getClassName(groceryItem)}>
-                  <text aria-label="Item name and days to purchase">
+                  <section aria-label="Item name and days to purchase">
                     {groceryItem.itemName} - {groceryItem.daysToPurchase} days
-                  </text>
+                  </section>
                   <label>
                     Purchased?{" "}
                     <input

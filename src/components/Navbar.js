@@ -1,6 +1,10 @@
 import React from "react";
-import { ReactComponent as MCB } from "./img/meat_cheese_bread.svg";
-import { Link, useRouteMatch } from "react-router-dom";
+import { ReactComponent as MCB } from "../img/meat_cheese_bread.svg";
+import { ReactComponent as ListView } from "../img/list_view.svg";
+import { ReactComponent as AddItem } from "../img/add_item.svg";
+import { ReactComponent as ChangeList } from "../img/change_list.svg";
+
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const navContainer = {
@@ -18,7 +22,7 @@ export default function Navbar() {
   };
 
   const link = {
-    marginLeft: "1%",
+    marginLeft: "10%",
   };
 
   return (
@@ -28,26 +32,22 @@ export default function Navbar() {
           <MCB />
           <h1>MCB</h1>
           <div style={link}>
-            <MenuLink activeWhenExact={true} pathTo="/List" label="List View" />
+            <Link to="/List">
+              <ListView />
+            </Link>
           </div>
           <div style={link}>
-            <MenuLink pathTo="/AddItem" label="Add Item" />
+            <Link to="/AddItem">
+              <AddItem />
+            </Link>
+          </div>
+          <div style={link}>
+            <Link to="/Home">
+              <ChangeList />
+            </Link>
           </div>
         </div>
       </div>
     </>
   );
 }
-
-const MenuLink = ({ label, pathTo, activeWhenExact = false }) => {
-  let match = useRouteMatch({
-    path: pathTo,
-    exact: activeWhenExact,
-  });
-
-  return (
-    <div className={match ? "active" : ""}>
-      <Link to={pathTo}>{label}</Link>
-    </div>
-  );
-};
