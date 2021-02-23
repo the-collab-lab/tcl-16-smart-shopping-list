@@ -37,3 +37,18 @@
 .inactive {
   background-color: lightgrey;
 }
+
+.navLink {
+  margin-left: 20px;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navStyle {
+  display: flex;
+  align-items: center;
+}
