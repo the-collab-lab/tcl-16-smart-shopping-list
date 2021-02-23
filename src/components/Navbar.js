@@ -8,27 +8,36 @@ import { ReactComponent as ShareList } from "../img/share_list.svg";
 
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <>
-      <div className="navContainer">
-        <div className="navStyle">
-          <MCB />
-          <h1>MCB</h1>
-          <Link className="navLink" to="/List">
-            <ListView />
-          </Link>
-          <Link className="navLink" to="/AddItem">
-            <AddItem />
-          </Link>
-          <Link className="navLink" to="/">
-            <ChangeList />
-          </Link>
-          <Link className="navLink" to="/">
-            <ShareList />
-          </Link>
+      {!props.auth ? (
+        <div className="navContainer">
+          <div className="navStyle">
+            <MCB />
+            <h1>MCB</h1>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="navContainer">
+          <div className="navStyle">
+            <MCB />
+            <h1>MCB</h1>
+            <Link className="navLink" to="/List">
+              <ListView />
+            </Link>
+            <Link className="navLink" to="/AddItem">
+              <AddItem />
+            </Link>
+            <Link className="navLink" to="/">
+              <ChangeList />
+            </Link>
+            <Link className="navLink" to="/">
+              <ShareList />
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 }

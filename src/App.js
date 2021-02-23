@@ -14,9 +14,9 @@ const App = () => {
 
   return (
     <Router>
+      <Navbar auth={auth} />
       {auth ? (
         <div className="App">
-          <Navbar />
           <Switch>
             <Route exact path="/">
               <ListContainer />
