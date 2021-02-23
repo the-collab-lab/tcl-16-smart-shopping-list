@@ -12,17 +12,21 @@ export default function Navbar(props) {
   return (
     <>
       {!props.auth ? (
-        <div className="navContainer">
-          <div className="navStyle">
-            <MCB />
-            <h1>MCB</h1>
-          </div>
-        </div>
+        <header className="navContainer">
+          <main className="navStyle">
+            <Link className="homeLink" to="/">
+              <MCB />
+              <h1>MCB</h1>
+            </Link>
+          </main>
+        </header>
       ) : (
-        <div className="navContainer">
-          <div className="navStyle">
-            <MCB />
-            <h1>MCB</h1>
+        <header className="navContainer">
+          <nav className="navStyle">
+            <Link className="homeLink" to="/">
+              <MCB />
+              <h1>MCB</h1>
+            </Link>
             <Link className="navLink" to="/List">
               <ListView />
             </Link>
@@ -35,8 +39,8 @@ export default function Navbar(props) {
             <Link className="navLink" to="/">
               <ShareList />
             </Link>
-          </div>
-        </div>
+          </nav>
+        </header>
       )}
     </>
   );

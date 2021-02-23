@@ -39,7 +39,14 @@
 }
 
 .navLink {
-  margin-left: 2em;
+  margin-left: 1em;
+}
+
+.homeLink {
+  display: flex;
+  align-items: center;
+  color: black;
+  margin-right: 2.5em;
 }
 
 .navContainer {
