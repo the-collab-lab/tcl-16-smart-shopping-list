@@ -23,15 +23,15 @@
 }
 
 .soon {
-  background-color: green;
+  background-color: #ff776e;
 }
 
 .kinda-soon {
-  background-color: yellow;
+  background-color: #fdab6d;
 }
 
 .not-soon {
-  background-color: red;
+  background-color: #fee0b3;
 }
 
 .inactive {
@@ -39,7 +39,7 @@
 }
 
 .navLink {
-  margin-left: 20px;
+  margin-left: 2em;
 }
 
 .navContainer {
@@ -51,4 +51,5 @@
 .navStyle {
   display: flex;
   align-items: center;
+  align-content: space-between;
 }

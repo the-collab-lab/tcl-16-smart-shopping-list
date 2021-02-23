@@ -14,21 +14,15 @@ export default function Navbar() {
         <div className="navStyle">
           <MCB />
           <h1>MCB</h1>
-          <div className="navLink">
-            <Link to="/List">
-              <ListView />
-            </Link>
-          </div>
-          <div className="navLink">
-            <Link to="/AddItem">
-              <AddItem />
-            </Link>
-          </div>
-          <div className="navLink">
-            <Link to="/">
-              <ChangeList />
-            </Link>
-          </div>
+          <Link className="navLink" to="/List">
+            <ListView />
+          </Link>
+          <Link className="navLink" to="/AddItem">
+            <AddItem />
+          </Link>
+          <Link className="navLink" to="/">
+            <ChangeList />
+          </Link>
         </div>
       </div>
     </>
