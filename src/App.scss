@@ -37,26 +37,3 @@
 .inactive {
   background-color: lightgrey;
 }
-
-.navLink {
-  margin-left: 1em;
-}
-
-.homeLink {
-  display: flex;
-  align-items: center;
-  color: black;
-  margin-right: 2.5em;
-}
-
-.navContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.navStyle {
-  display: flex;
-  align-items: center;
-  align-content: space-between;
-}
