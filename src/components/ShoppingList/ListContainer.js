@@ -15,7 +15,6 @@ const ListContainer = () => {
 
   return (
     <>
-      <hr />
       {error && <strong>Error: {JSON.stringify(error)}</strong>}
       {loading && <span>Loading Shopping List...</span>}
       {value && (value.empty ? <EmptyList /> : <PopulatedList />)}
