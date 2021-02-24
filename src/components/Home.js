@@ -27,7 +27,7 @@ const Home = (props) => {
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
           swal({
-            title: "Uh oh!",
+            title: "Oh no!",
             text: "This list does not exist.",
             icon: "error"
           });
