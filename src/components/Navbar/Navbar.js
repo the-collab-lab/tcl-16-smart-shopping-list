@@ -36,8 +36,9 @@ export default function Navbar(props) {
         history.push("/");
         swal({
           text: "You have successfully logged out",
-          dangerMode: true,
           icon: "success",
+          buttons: false,
+          timer: 2000,
         });
       }
     });
