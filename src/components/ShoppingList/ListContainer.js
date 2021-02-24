@@ -3,7 +3,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
 
 import EmptyList from "./EmptyList";
-import PopulatedList from "./PopulatedList";
+import PopulatedList from "./PopulatedList/PopulatedList";
 
 const ListContainer = () => {
   const [value, loading, error] = useCollection(
@@ -15,7 +15,6 @@ const ListContainer = () => {
 
   return (
     <>
-      <hr />
       {error && <strong>Error: {JSON.stringify(error)}</strong>}
       {loading && <span>Loading Shopping List...</span>}
       {value && (value.empty ? <EmptyList /> : <PopulatedList />)}

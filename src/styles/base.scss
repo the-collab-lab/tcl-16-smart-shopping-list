@@ -28,11 +28,11 @@ ul {
 }
 
 body {
-  @include primary-font(16px);
+  @include primary-font(18px);
 }
 
 h1 {
-  @include secondary-font(30px);
+  @include secondary-font(40px);
 }
 
 // button styles
