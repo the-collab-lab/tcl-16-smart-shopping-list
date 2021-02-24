@@ -18,14 +18,15 @@ export default function Navbar(props) {
     const token = localStorage.getItem("token");
     swal({
       title: token,
-      text: "Use this token to share this shopping list with friends",
+      text:
+        "Write down this three-word token phrase to share access with friends or reaccess this list yourself",
       dangerMode: true,
     });
   };
 
-  const logoutHandler = () => {
+  const clearTokenHandler = () => {
     swal({
-      title: "Do you want to log out?",
+      title: "Do you want to eject this list and access another?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -68,7 +69,7 @@ export default function Navbar(props) {
             <Link className="navLink" to="/AddItem">
               <AddItem />
             </Link>
-            <Link className="navLink" to="/" onClick={logoutHandler}>
+            <Link className="navLink" to="/" onClick={clearTokenHandler}>
               <ChangeList />
             </Link>
             <Link className="navLink" to="/" onClick={shareTokenHandler}>
