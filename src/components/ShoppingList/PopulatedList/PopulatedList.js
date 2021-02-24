@@ -163,13 +163,14 @@ const PopulatedList = () => {
       )}
       <div>
         {listData && (
-          <ul>
+          <ul className="list">
             {filteredList.map((groceryItem) => (
-              <Fragment key={groceryItem.id}>
-                <div className={getClassName(groceryItem)}>
-                  <section aria-label="Item name and days to purchase">
-                    {groceryItem.itemName} - {groceryItem.daysToPurchase} days
-                  </section>
+              <div
+                className={getClassName(groceryItem)}
+                className="list-item"
+                key={groceryItem.id}
+              >
+                <div className="checkbox">
                   <label>
                     Purchased?{" "}
                     <input
@@ -184,11 +185,29 @@ const PopulatedList = () => {
                       )}
                     />{" "}
                   </label>
-                  <button onClick={() => deleteItemHandler(groceryItem.id)}>
-                    Delete
-                  </button>
                 </div>
-              </Fragment>
+
+                <div className="item-details">
+                  <div className="item-name">
+                    <p>{groceryItem.itemName}</p>
+                  </div>
+                  {/* <div className="item-purchase-date">
+                      <p>{new Date(groceryItem.lastPurchasedDate['seconds'])}</p>
+                  </div> */}
+                </div>
+
+                <div className="days">
+                  <p>{groceryItem.daysToPurchase}</p>
+                  <p>days</p>
+                </div>
+
+                <button
+                  className="delete-button"
+                  onClick={() => deleteItemHandler(groceryItem.id)}
+                >
+                  Delete
+                </button>
+              </div>
             ))}
           </ul>
         )}
