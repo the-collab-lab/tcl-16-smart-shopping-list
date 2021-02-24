@@ -3,7 +3,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../lib/firebase";
 
 import EmptyList from "./EmptyList";
-import PopulatedList from "./PopulatedList";
+import PopulatedList from "./PopulatedList/PopulatedList";
 
 const ListContainer = () => {
   const [value, loading, error] = useCollection(

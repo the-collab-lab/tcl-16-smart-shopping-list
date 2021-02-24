@@ -1,7 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../../lib/firebase";
-import calculateEstimate from "../../lib/estimates";
+import { db } from "../../../lib/firebase";
+import "./PopulatedList.scss";
+import calculateEstimate from "../../../lib/estimates";
 import swal from "@sweetalert/with-react";
 
 const PopulatedList = () => {
@@ -141,14 +142,6 @@ const PopulatedList = () => {
     }
   }
 
-  const itemCard = {
-    margin: "10px",
-    padding: "10px",
-    border: "1px solid black",
-    display: "flex",
-    flexDirection: "column",
-  };
-
   return (
     <div className="shopping-list">
       <h1>Shopping List</h1>
@@ -173,7 +166,7 @@ const PopulatedList = () => {
           <ul>
             {filteredList.map((groceryItem) => (
               <Fragment key={groceryItem.id}>
-                <div style={itemCard} className={getClassName(groceryItem)}>
+                <div className={getClassName(groceryItem)}>
                   <section aria-label="Item name and days to purchase">
                     {groceryItem.itemName} - {groceryItem.daysToPurchase} days
                   </section>

@@ -1,0 +1,29 @@
+@import "../../../styles/variables.scss";
+
+.itemCard {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.soon {
+  @extend .itemCard;
+  background-color: $soon;
+}
+
+.kinda-soon {
+  @extend .itemCard;
+  background-color: $kinda-soon;
+}
+
+.not-soon {
+  @extend .itemCard;
+  background-color: $not-soon;
+}
+
+.inactive {
+  @extend .itemCard;
+  background-color: $inactive;
+}
