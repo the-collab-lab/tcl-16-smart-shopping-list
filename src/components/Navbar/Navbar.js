@@ -8,16 +8,38 @@ import { ReactComponent as AddItem } from "../../img/add_item.svg";
 import { ReactComponent as ChangeList } from "../../img/change_list.svg";
 import { ReactComponent as ShareList } from "../../img/share_list.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import swal from "@sweetalert/with-react";
 
 export default function Navbar(props) {
+  const history = useHistory();
+
   const shareTokenHandler = () => {
     const token = localStorage.getItem("token");
     swal({
       title: token,
       text: "Use this token to share this shopping list with friends",
       dangerMode: true,
+    });
+  };
+
+  const logoutHandler = () => {
+    swal({
+      title: "Do you want to log out?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willLogout) => {
+      if (willLogout) {
+        localStorage.removeItem("token");
+        props.setAuth(false);
+        history.push("/");
+        swal({
+          text: "You have successfully logged out",
+          dangerMode: true,
+          icon: "success",
+        });
+      }
     });
   };
 
@@ -45,7 +67,7 @@ export default function Navbar(props) {
             <Link className="navLink" to="/AddItem">
               <AddItem />
             </Link>
-            <Link className="navLink" to="/">
+            <Link className="navLink" to="/" onClick={logoutHandler}>
               <ChangeList />
             </Link>
             <Link className="navLink" to="/" onClick={shareTokenHandler}>

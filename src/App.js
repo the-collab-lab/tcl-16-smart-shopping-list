@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar auth={auth} />
+      <Navbar auth={auth} setAuth={setAuth} />
       {auth ? (
         <div className="App">
           <Switch>
