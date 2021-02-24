@@ -4,7 +4,6 @@ import { db } from "../../../lib/firebase";
 import "./PopulatedList.scss";
 import calculateEstimate from "../../../lib/estimates";
 import swal from "@sweetalert/with-react";
-import "../../../styles/swal.scss"
 
 const PopulatedList = () => {
   const [listData] = useCollection(
@@ -68,7 +67,7 @@ const PopulatedList = () => {
   const deleteItemHandler = (id) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you cannot revert back.",
+      text: "Once deleted, this action cannot be undone.",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -77,6 +76,7 @@ const PopulatedList = () => {
         db.collection(localStorage.getItem("token")).doc(id).delete();
         swal("Item deleted!", {
           icon: "success",
+          button: false
         });
       }
     });

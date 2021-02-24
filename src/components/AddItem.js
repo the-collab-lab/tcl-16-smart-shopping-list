@@ -22,7 +22,7 @@ const AddItem = () => {
     e.preventDefault();
     const alreadyExists = await existingItemCheck(groceryItem);
     if (alreadyExists) {
-      alert("Item already on shoppping list");
+      alert("Item already on shopping list");
       return;
     }
     db.collection(localStorage.getItem("token")).add({
@@ -38,7 +38,7 @@ const AddItem = () => {
     swal("Item added!", {
       icon: "success",
       buttons: false,
-      timer: 500,
+      timer: 1000,
     });
   };
 
@@ -64,6 +64,7 @@ const AddItem = () => {
 
   return (
     <div className="add-item">
+      <h1>Add Item</h1>
       <form onSubmit={onSubmitHandler}>
         <label htmlFor="addItem">Item name: </label>
         <input
@@ -107,7 +108,7 @@ const AddItem = () => {
           />
           <label htmlFor="not-soon">Not Soon</label>
         </fieldset>
-        <input type="submit" value="Add Item" />
+        <input type="submit" value="Add to List" />
       </form>
     </div>
   );
