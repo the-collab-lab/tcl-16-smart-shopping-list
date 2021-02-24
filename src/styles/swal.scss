@@ -1,0 +1,25 @@
+@import "./variables.scss";
+
+.swal-title {
+    color: $black;
+    font-family: $lato;
+}
+  
+.swal-text {
+    font-family: $merriweather;
+}
+  
+.swal-button--confirm {
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: $lato;
+    background-color: $orange;
+}
+  
+.swal-button--cancel {
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: $lato;
+    color: $black;
+    background-color: #fee0b3;
+}

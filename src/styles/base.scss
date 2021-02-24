@@ -43,9 +43,11 @@ input[type="submit"] {
   border: none;
   border-radius: 15px;
   padding: 5px 20px;
+  outline: none;
 }
 
 // text input styles
 input[type="text"] {
   border-radius: 15px;
+  outline: none;
 }

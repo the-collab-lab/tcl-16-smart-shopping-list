@@ -4,6 +4,7 @@ import { db } from "../../../lib/firebase";
 import "./PopulatedList.scss";
 import calculateEstimate from "../../../lib/estimates";
 import swal from "@sweetalert/with-react";
+import "../../../styles/swal.scss"
 
 const PopulatedList = () => {
   const [listData] = useCollection(
