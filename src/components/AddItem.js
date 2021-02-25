@@ -63,7 +63,7 @@ const AddItem = () => {
   };
 
   return (
-    <div className="add-item">
+    <main className="add-item">
       <form onSubmit={onSubmitHandler}>
         <label htmlFor="addItem">Item name: </label>
         <input
@@ -109,7 +109,7 @@ const AddItem = () => {
         </fieldset>
         <input type="submit" value="Add Item" />
       </form>
-    </div>
+    </main>
   );
 };
 

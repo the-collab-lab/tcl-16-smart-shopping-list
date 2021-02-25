@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../../lib/firebase";
 import "./PopulatedList.scss";
@@ -143,76 +143,77 @@ const PopulatedList = () => {
   }
 
   return (
-    <div className="shopping-list">
-      <h1>Shopping List</h1>
-      <label>
-        Filter items:{" "}
-        <input
-          aria-label="Filter Items"
-          id="itemFilter"
-          name="itemFilter"
-          type="text"
-          value={filterValue}
-          onChange={onFilterChange}
-        />
-      </label>
-      {filterValue !== "" && (
-        <button aria-label="Clear filter" onClick={resetFilter}>
-          X
-        </button>
-      )}
-      <div>
-        {listData && (
-          <ul className="list">
-            {filteredList.map((groceryItem) => (
-              <div
-                className={getClassName(groceryItem)}
-                className="list-item"
-                key={groceryItem.id}
-              >
-                <div className="checkbox">
-                  <label>
-                    Purchased?{" "}
-                    <input
-                      aria-label="Purchased?"
-                      type="checkbox"
-                      id={groceryItem.itemName}
-                      name={groceryItem.itemName}
-                      value={groceryItem.id}
-                      onChange={(e) => onPurchaseChange(e, groceryItem)}
-                      checked={hasItemBeenPurchased(
-                        groceryItem.lastPurchasedDate,
-                      )}
-                    />{" "}
-                  </label>
-                </div>
-
-                <div className="item-details">
-                  <div className="item-name">
-                    <p>{groceryItem.itemName}</p>
-                  </div>
-                  {/* <div className="item-purchase-date">
-                      <p>{new Date(groceryItem.lastPurchasedDate['seconds'])}</p>
-                  </div> */}
-                </div>
-
-                <div className="days">
-                  <p>{groceryItem.daysToPurchase}</p>
-                  <p>days</p>
-                </div>
-
-                <button
-                  className="delete-button"
-                  onClick={() => deleteItemHandler(groceryItem.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          </ul>
+    <>
+      <div className="shopping-list">
+        <h1>Shopping List</h1>
+        <label>
+          Filter items:{" "}
+          <input
+            aria-label="Filter Items"
+            id="itemFilter"
+            name="itemFilter"
+            type="text"
+            value={filterValue}
+            onChange={onFilterChange}
+          />
+        </label>
+        {filterValue !== "" && (
+          <button aria-label="Clear filter" onClick={resetFilter}>
+            Clear
+          </button>
         )}
       </div>
-    </div>
+      <div className="listDataContainer">
+        {listData && (
+          <div className="listItemContainer">
+            {filteredList.map((groceryItem) => (
+              <div key={groceryItem.id}>
+                <div className={getClassName(groceryItem)}>
+                  <div className="itemArrangement">
+                    <div className="checkedItemContainer">
+                      <label>
+                        <input
+                          aria-label="Purchased?"
+                          type="checkbox"
+                          id={groceryItem.itemName}
+                          name={groceryItem.itemName}
+                          value={groceryItem.id}
+                          onChange={(e) => onPurchaseChange(e, groceryItem)}
+                          checked={hasItemBeenPurchased(
+                            groceryItem.lastPurchasedDate,
+                          )}
+                        />
+                      </label>
+                    </div>
+
+                    <div className="itemDetailsContainer">
+                      <div className="itemName">{groceryItem.itemName}</div>
+                      <div className="lastPurchaseDate">
+                        {/* {groceryItem.lastPurchasedDate} */}
+                      </div>
+                    </div>
+
+                    <div className="countdownContainer">
+                      <div className="daysNumber">
+                        {groceryItem.daysToPurchase}
+                      </div>
+                      <div className="daysText">
+                        <p>days</p>
+                      </div>
+                    </div>
+                    <div className="deleteItemContainer">
+                      <button onClick={() => deleteItemHandler(groceryItem.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
