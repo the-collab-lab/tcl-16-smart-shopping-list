@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { db } from "../lib/firebase";
+import { db } from "../../lib/firebase";
 import swal from "@sweetalert/with-react";
+// styles
+import "./AddItem.scss";
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
@@ -74,7 +76,7 @@ const AddItem = () => {
           onChange={onGroceryItemInputChange}
           required
         />
-        <fieldset border="none">
+        <fieldset>
           <p>How soon will you buy this again?</p>
           <input
             id="soon"
