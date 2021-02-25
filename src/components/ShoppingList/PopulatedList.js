@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../../../lib/firebase";
-import "./PopulatedList.scss";
-import calculateEstimate from "../../../lib/estimates";
+import { db } from "../../lib/firebase";
+import calculateEstimate from "../../lib/estimates";
 import swal from "@sweetalert/with-react";
 
 const PopulatedList = () => {
@@ -142,26 +141,13 @@ const PopulatedList = () => {
     }
   }
 
-  function formatTime(seconds) {
-    const months = {
-      0: "Jan.",
-      1: "Feb.",
-      2: "March",
-      3: "April",
-      4: "May",
-      5: "June",
-      6: "July",
-      7: "Aug.",
-      8: "Sept.",
-      9: "Oct.",
-      10: "Nov.",
-      11: "Dec.",
-    };
-    const timestamp = new Date(seconds * 1000);
-    return `${
-      months[timestamp.getMonth()]
-    } ${timestamp.getDate()}, ${timestamp.getFullYear()}`;
-  }
+  const itemCard = {
+    margin: "10px",
+    padding: "10px",
+    border: "1px solid black",
+    display: "flex",
+    flexDirection: "column",
+  };
 
   return (
     <div className="shopping-list">
@@ -184,14 +170,13 @@ const PopulatedList = () => {
       )}
       <div>
         {listData && (
-          <ul className="list">
+          <ul>
             {filteredList.map((groceryItem) => (
-              <div
-                className={getClassName(groceryItem)}
-                className="list-item"
-                key={groceryItem.id}
-              >
-                <div className="checkbox">
+              <Fragment key={groceryItem.id}>
+                <div style={itemCard} className={getClassName(groceryItem)}>
+                  <text aria-label="Item name and days to purchase">
+                    {groceryItem.itemName} - {groceryItem.daysToPurchase} days
+                  </text>
                   <label>
                     Purchased?{" "}
                     <input
@@ -206,35 +191,11 @@ const PopulatedList = () => {
                       )}
                     />{" "}
                   </label>
+                  <button onClick={() => deleteItemHandler(groceryItem.id)}>
+                    Delete
+                  </button>
                 </div>
-
-                <div className="item-details">
-                  <div className="item-name">
-                    <p>{groceryItem.itemName}</p>
-                  </div>
-                  <div className="item-purchase-date">
-                    <p></p>
-                    <p>
-                      $:{" "}
-                      {groceryItem.lastPurchasedDate
-                        ? formatTime(groceryItem.lastPurchasedDate["seconds"])
-                        : ""}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="days">
-                  <p>{groceryItem.daysToPurchase}</p>
-                  <p>days</p>
-                </div>
-
-                <button
-                  className="delete-button"
-                  onClick={() => deleteItemHandler(groceryItem.id)}
-                >
-                  Delete
-                </button>
-              </div>
+              </Fragment>
             ))}
           </ul>
         )}
