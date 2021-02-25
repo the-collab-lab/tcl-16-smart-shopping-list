@@ -43,6 +43,16 @@ $mobile: 480px;
   font-weight: 700;
 }
 
+// common styles for input/buttons
+@mixin input {
+  border-radius: 15px;
+  padding: 5px 20px;
+  width: 500px;
+  @include maxScreen($tablet) {
+    width: 300px;
+  }
+}
+
 @mixin minScreen($size) {
   @media screen and (min-width: $size) {
     @content;

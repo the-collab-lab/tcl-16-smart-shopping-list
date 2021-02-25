@@ -62,17 +62,13 @@ input[type="submit"] {
   background-color: $red-orange;
   color: $white;
   border: none;
-  border-radius: 15px;
-  padding: 5px 20px;
-  width: 500px;
+  @include input;
 }
 
 // text input styles
 input[type="text"] {
-  border-radius: 15px;
-  padding: 5px 20px;
-  width: 500px;
   border-color: $black;
+  @include input;
 }
 
 ::placeholder {
