@@ -64,6 +64,7 @@ const Home = (props) => {
           placeholder="three word token"
           value={token}
           onChange={onTokenInputChange}
+          required
         />
         <button>Join an existing list</button>
       </form>
