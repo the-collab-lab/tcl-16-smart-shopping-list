@@ -8,6 +8,19 @@
   box-sizing: border-box;
 }
 
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   display: inline-block;
@@ -35,6 +48,10 @@ h1 {
   @include secondary-font(40px);
 }
 
+h2 {
+  @include secondary-font(30px);
+}
+
 // button styles
 button,
 input[type="submit"] {
@@ -43,9 +60,17 @@ input[type="submit"] {
   border: none;
   border-radius: 15px;
   padding: 5px 20px;
+  width: 500px;
 }
 
 // text input styles
 input[type="text"] {
   border-radius: 15px;
+  padding: 5px 20px;
+  width: 500px;
+  border-color: $black;
+}
+
+::placeholder {
+  color: $black;
 }

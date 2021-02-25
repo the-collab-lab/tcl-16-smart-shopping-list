@@ -1,6 +1,5 @@
 import React from "react";
 import "./Navbar.scss";
-import "../../styles/base.scss";
 
 import { ReactComponent as MCB } from "../../img/meat_cheese_bread.svg";
 import { ReactComponent as ListView } from "../../img/list_view.svg";
