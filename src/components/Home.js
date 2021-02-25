@@ -40,7 +40,7 @@ const Home = (props) => {
   };
 
   return (
-    <div className="home">
+    <main className="home">
       <h1>Welcome to Smart-Shopper! Let's make a list and start tracking.</h1>
       <button className="new-list-btn" onClick={generateToken}>
         Create new list
@@ -59,7 +59,7 @@ const Home = (props) => {
         />
         <button>Join an existing list</button>
       </form>
-    </div>
+    </main>
   );
 };
 

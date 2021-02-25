@@ -1,11 +1,12 @@
 @import "../../../styles/variables.scss";
 
 .itemCard {
-  margin: 10px;
+  border: solid 5px yellow;
   padding: 10px;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .soon {
@@ -26,4 +27,50 @@
 .inactive {
   @extend .itemCard;
   background-color: $inactive;
+}
+
+.listDataContainer {
+  margin-top: 2em;
+  border: solid 5px green;
+}
+
+.listItemContainer {
+  border: solid 5px blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemArrangement {
+  border: solid 5px red;
+  display: flex;
+  width: 50;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkedItemContainer {
+  border: solid 5px black;
+  height: 100%;
+}
+
+.itemDetailsContainer {
+  border: solid 5px black;
+}
+
+.countdownContainer {
+  border: solid 5px black;
+}
+
+.deleteItemContainer {
+  border: solid 5px black;
+}
+.itemName {
+  border: solid 5px purple;
+}
+.daysNumber {
+  border: solid 5px purple;
+}
+
+.daysText {
+  border: solid 5px purple;
 }
