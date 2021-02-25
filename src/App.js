@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import "./App.scss";
 import "./styles/base.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NotFound from "./components/NotFound";
 import AddItem from "./components/AddItem";
 import ListContainer from "./components/ShoppingList/ListContainer";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import getToken from "../lib/tokens.js";
 import { useHistory } from "react-router-dom";
-import { db } from "../lib/firebase";
+import getToken from "../../lib/tokens.js";
+import { db } from "../../lib/firebase";
 import swal from "@sweetalert/with-react";
+// styles
+import "./Home.scss";
+// image
+import { ReactComponent as VeggieFruit } from "../../img/veggie_fruit.svg";
 
 const Home = (props) => {
   const [token, setToken] = useState("");
@@ -49,24 +53,27 @@ const Home = (props) => {
 
   return (
     <div className="home">
-      <h1>Welcome to Smart-Shopper! Let's make a list and start tracking.</h1>
+      <h1>Welcome to Meat Cheese Bread!</h1>
+      <VeggieFruit />
+      <h2>Are you new?</h2>
       <button className="new-list-btn" onClick={generateToken}>
         Create new list
       </button>
-      <p>- or -</p>
-      <p>Join an existing shopping list by entering a three word token.</p>
+      <h2>Or joining a list?</h2>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="joinList">Paste token here: </label>
+        <label htmlFor="joinList" className="visually-hidden">
+          Paste token here
+        </label>
         <input
           id="joinList"
           name="joinList"
           type="text"
-          placeholder="three word token"
+          placeholder="Enter your code..."
           value={token}
           onChange={onTokenInputChange}
           required
         />
-        <button>Join an existing list</button>
+        <button>Join list</button>
       </form>
     </div>
   );

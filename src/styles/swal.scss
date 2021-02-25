@@ -10,18 +10,16 @@
 }
   
 .swal-button--confirm {
-    border-radius: 15px;
     font-size: 15px;
-    font-family: $lato;
     background-color: $orange;
-    padding: 5px 20px;
+    @include input;
+    width: auto;
 }
   
 .swal-button--cancel {
-    border-radius: 15px;
     font-size: 15px;
-    font-family: $lato;
     color: $black;
     background-color: $not-soon;
-    padding: 5px 20px;
+    @include input;
+    width: auto;
 }
