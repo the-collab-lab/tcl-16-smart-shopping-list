@@ -1,9 +1,11 @@
 .home {
+  height: 100vh;
   text-align: center;
 
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 50%;
   }
 }

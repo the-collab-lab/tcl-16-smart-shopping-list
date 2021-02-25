@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: $background;
+}
+
 .visually-hidden:not(:focus):not(:active) {
   position: absolute;
   width: 1px;

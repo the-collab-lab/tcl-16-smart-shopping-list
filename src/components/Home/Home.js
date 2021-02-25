@@ -4,6 +4,8 @@ import getToken from "../../lib/tokens.js";
 import { db } from "../../lib/firebase";
 // styles
 import "./Home.scss";
+// image
+import { ReactComponent as VeggieFruit } from "../../img/veggie_fruit.svg";
 
 const Home = (props) => {
   const [token, setToken] = useState("");
@@ -44,6 +46,7 @@ const Home = (props) => {
   return (
     <div className="home">
       <h1>Welcome to Meat Cheese Bread!</h1>
+      <VeggieFruit />
       <h2>Are you new?</h2>
       <button className="new-list-btn" onClick={generateToken}>
         Create new list
