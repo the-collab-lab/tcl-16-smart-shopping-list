@@ -18,14 +18,14 @@ export default function Navbar(props) {
     swal({
       title: token,
       text:
-        "Write down this three-word token phrase to share access with friends or reaccess this list yourself",
+        "Write down this code to share this list with friends or re-access yourself!",
       dangerMode: true,
     });
   };
 
   const clearTokenHandler = () => {
     swal({
-      title: "Do you want to eject this list and access another?",
+      title: "Do you want to eject and access another list?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
