@@ -14,6 +14,10 @@
     background-color: $orange;
     @include input;
     width: auto;
+
+    @include maxScreen($tablet) {
+        width: auto;
+    }
 }
   
 .swal-button--cancel {
@@ -22,4 +26,8 @@
     background-color: $not-soon;
     @include input;
     width: auto;
+
+    @include maxScreen($tablet) {
+        width: auto;
+    }
 }
