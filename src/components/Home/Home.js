@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import getToken from "../../lib/tokens.js";
 import { db } from "../../lib/firebase";
+import swal from "@sweetalert/with-react";
 // styles
 import "./Home.scss";
 // image
@@ -29,7 +30,11 @@ const Home = (props) => {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          alert("uh oh! list does not exist");
+          swal({
+            title: "Oh no!",
+            text: "This list does not exist.",
+            icon: "error",
+          });
         } else {
           localStorage.setItem("token", token);
           props.setAuth(token);
@@ -37,7 +42,10 @@ const Home = (props) => {
         }
       })
       .catch((error) => {
-        alert(error);
+        swal({
+          title: "Error",
+          text: error,
+        });
       });
 
     setToken("");
@@ -63,6 +71,7 @@ const Home = (props) => {
           placeholder="Enter your code..."
           value={token}
           onChange={onTokenInputChange}
+          required
         />
         <button>Join list</button>
       </form>
