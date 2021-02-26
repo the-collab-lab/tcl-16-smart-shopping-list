@@ -46,6 +46,9 @@ ul {
 
 body {
   @include primary-font(18px);
+  @include minScreen($tablet) {
+    font-size: 22px;
+  }
 }
 
 h1 {

@@ -109,7 +109,7 @@ const AddItem = () => {
           />
           <label htmlFor="not-soon">Not Soon</label>
         </fieldset>
-        <input type="submit" value="Add Item" />
+        <input type="submit" value="Add to Shopping List" />
       </form>
     </div>
   );
