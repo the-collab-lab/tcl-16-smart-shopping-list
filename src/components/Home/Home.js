@@ -33,7 +33,7 @@ const Home = (props) => {
           swal({
             title: "Oh no!",
             text: "This list does not exist.",
-            icon: "error"
+            icon: "error",
           });
         } else {
           localStorage.setItem("token", token);
@@ -44,7 +44,7 @@ const Home = (props) => {
       .catch((error) => {
         swal({
           title: "Error",
-          text: error
+          text: error,
         });
       });
 

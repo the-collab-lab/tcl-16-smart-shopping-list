@@ -1,25 +1,25 @@
 @import "./variables.scss";
 
 .swal-title {
-    color: $black;
-    font-family: $lato;
+  color: $black;
+  font-family: $lato;
 }
-  
+
 .swal-text {
-    font-family: $merriweather;
+  font-family: $merriweather;
 }
-  
+
 .swal-button--confirm {
-    font-size: 15px;
-    background-color: $orange;
-    @include input;
-    width: auto;
+  font-size: 15px;
+  background-color: $orange;
+  @include input;
+  width: auto;
 }
-  
+
 .swal-button--cancel {
-    font-size: 15px;
-    color: $black;
-    background-color: $not-soon;
-    @include input;
-    width: auto;
+  font-size: 15px;
+  color: $black;
+  background-color: $not-soon;
+  @include input;
+  width: auto;
 }
