@@ -1,11 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap");
 @import "./normalize.scss";
 @import "./variables.scss";
+@import "./swal.scss";
 
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+body {
+  background-color: $background;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 a {
@@ -35,17 +53,27 @@ h1 {
   @include secondary-font(40px);
 }
 
+h2 {
+  @include secondary-font(30px);
+}
+
 // button styles
 button,
 input[type="submit"] {
   background-color: $red-orange;
   color: $white;
   border: none;
-  border-radius: 15px;
-  padding: 5px 20px;
+  outline: none;
+  @include input;
 }
 
 // text input styles
 input[type="text"] {
-  border-radius: 15px;
+  border-color: $black;
+  outline: none;
+  @include input;
+}
+
+::placeholder {
+  color: $black;
 }

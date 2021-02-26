@@ -4,6 +4,8 @@ import { db } from "../../../lib/firebase";
 import "./PopulatedList.scss";
 import calculateEstimate from "../../../lib/estimates";
 import swal from "@sweetalert/with-react";
+import { ReactComponent as Checkbox } from "../../../img/circle_empty.svg";
+import { ReactComponent as DeleteButton } from "../../../img/delete_button.svg";
 
 const PopulatedList = () => {
   const [listData] = useCollection(
@@ -67,7 +69,7 @@ const PopulatedList = () => {
   const deleteItemHandler = (id) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you cannot revert back.",
+      text: "Once deleted, this action cannot be undone.",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -76,6 +78,7 @@ const PopulatedList = () => {
         db.collection(localStorage.getItem("token")).doc(id).delete();
         swal("Item deleted!", {
           icon: "success",
+          button: false,
         });
       }
     });
@@ -192,7 +195,7 @@ const PopulatedList = () => {
                 <div className={getClassName(groceryItem)}>
                   <div className="itemArrangement">
                     <div className="checkedItemContainer">
-                      <label>
+                      <div className="checkbox">
                         <input
                           aria-label="Purchased?"
                           type="checkbox"
@@ -203,14 +206,21 @@ const PopulatedList = () => {
                           checked={hasItemBeenPurchased(
                             groceryItem.lastPurchasedDate,
                           )}
+                          visible="false"
                         />
-                      </label>
+                        <label for="checkbox">
+                          <Checkbox className="circle" aria-hidden="true" />
+                        </label>
+                      </div>
                     </div>
 
                     <div className="itemDetailsContainer">
                       <div className="itemName">{groceryItem.itemName}</div>
                       <div className="lastPurchaseDate">
-                        {/* {groceryItem.lastPurchasedDate} */}
+                        $:{" "}
+                        {groceryItem.lastPurchasedDate
+                          ? formatTime(groceryItem.lastPurchasedDate["seconds"])
+                          : "n/a"}
                       </div>
                     </div>
 
@@ -218,24 +228,13 @@ const PopulatedList = () => {
                       <div className="daysNumber">
                         {groceryItem.daysToPurchase}
                       </div>
-                      <div className="daysText">
-                        <p>days</p>
-                      </div>
+                      <div className="daysText">days</div>
                     </div>
                     <div className="deleteItemContainer">
-                      <button onClick={() => deleteItemHandler(groceryItem.id)}>
-                        Delete
-                      </button>
+                      <DeleteButton
+                        onClick={() => deleteItemHandler(groceryItem.id)}
+                      />
                     </div>
-                  </div>
-                  <div className="item-purchase-date">
-                    <p></p>
-                    <p>
-                      $:{" "}
-                      {groceryItem.lastPurchasedDate
-                        ? formatTime(groceryItem.lastPurchasedDate["seconds"])
-                        : ""}
-                    </p>
                   </div>
                 </div>
               </div>
