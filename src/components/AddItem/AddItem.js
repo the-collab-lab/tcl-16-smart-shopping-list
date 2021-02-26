@@ -3,6 +3,8 @@ import { db } from "../../lib/firebase";
 import swal from "@sweetalert/with-react";
 // styles
 import "./AddItem.scss";
+// image
+import { ReactComponent as WineDog } from "../../img/wine_dog.svg";
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
@@ -68,7 +70,7 @@ const AddItem = () => {
     <div className="add-item">
       <h1>Add Item</h1>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="addItem">Item name: </label>
+        <label htmlFor="addItem">Item Name </label>
         <input
           id="addItem"
           name="addItem"
@@ -112,6 +114,9 @@ const AddItem = () => {
         </fieldset>
         <input type="submit" value="Add to Shopping List" />
       </form>
+      <div className="image-container">
+        <WineDog />
+      </div>
     </div>
   );
 };
