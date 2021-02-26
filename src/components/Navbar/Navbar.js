@@ -68,10 +68,10 @@ export default function Navbar(props) {
             <Link className="navLink" to="/AddItem">
               <AddItem />
             </Link>
-            <Link className="navLink" to="/" onClick={clearTokenHandler}>
+            <Link className="navLink" onClick={clearTokenHandler}>
               <ChangeList />
             </Link>
-            <Link className="navLink" to="/" onClick={shareTokenHandler}>
+            <Link className="navLink" onClick={shareTokenHandler}>
               <ShareList />
             </Link>
           </nav>
