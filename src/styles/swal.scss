@@ -10,16 +10,24 @@
 }
 
 .swal-button--confirm {
-  font-size: 15px;
-  background-color: $orange;
-  @include input;
-  width: auto;
+    font-size: 15px;
+    background-color: $orange;
+    @include input;
+    width: auto;
+
+    @include maxScreen($tablet) {
+        width: auto;
+    }
 }
 
 .swal-button--cancel {
-  font-size: 15px;
-  color: $black;
-  background-color: $not-soon;
-  @include input;
-  width: auto;
+    font-size: 15px;
+    color: $black;
+    background-color: $not-soon;
+    @include input;
+    width: auto;
+
+    @include maxScreen($tablet) {
+        width: auto;
+    }
 }
