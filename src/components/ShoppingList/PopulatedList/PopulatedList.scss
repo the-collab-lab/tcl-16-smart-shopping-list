@@ -68,7 +68,13 @@
   margin-left: 1em;
 }
 .itemName {
+  text-transform: lowercase;
+  font-weight: bold;
   text-align: left;
+}
+
+.itemName::first-letter {
+  text-transform: capitalize;
 }
 
 .lastPurchaseDate {

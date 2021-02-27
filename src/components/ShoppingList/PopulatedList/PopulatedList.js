@@ -78,6 +78,7 @@ const PopulatedList = () => {
         swal("Item deleted!", {
           icon: "success",
           button: false,
+          timer: 1000,
         });
       }
     });
