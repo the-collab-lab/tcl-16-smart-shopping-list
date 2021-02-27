@@ -4,7 +4,6 @@ import { db } from "../../../lib/firebase";
 import "./PopulatedList.scss";
 import calculateEstimate from "../../../lib/estimates";
 import swal from "@sweetalert/with-react";
-import { ReactComponent as Checkbox } from "../../../img/circle_empty.svg";
 import { ReactComponent as DeleteButton } from "../../../img/delete_button.svg";
 
 const PopulatedList = () => {
@@ -168,24 +167,26 @@ const PopulatedList = () => {
 
   return (
     <>
-      <div className="shopping-list">
-        <h1>Shopping List</h1>
-        <label>
-          Filter items:{" "}
-          <input
-            aria-label="Filter Items"
-            id="itemFilter"
-            name="itemFilter"
-            type="text"
-            value={filterValue}
-            onChange={onFilterChange}
-          />
-        </label>
-        {filterValue !== "" && (
-          <button aria-label="Clear filter" onClick={resetFilter}>
-            Clear
-          </button>
-        )}
+      <div className="headerContainer">
+        <div className="shoppingListHeader">
+          <h1>Shopping List</h1>
+          <label>
+            Filter items:{" "}
+            <input
+              aria-label="Filter Items"
+              id="itemFilter"
+              name="itemFilter"
+              type="text"
+              value={filterValue}
+              onChange={onFilterChange}
+            />
+          </label>
+          {filterValue !== "" && (
+            <button aria-label="Clear filter" onClick={resetFilter}>
+              Clear
+            </button>
+          )}
+        </div>
       </div>
       <div className="listDataContainer">
         {listData && (
@@ -206,11 +207,8 @@ const PopulatedList = () => {
                           checked={hasItemBeenPurchased(
                             groceryItem.lastPurchasedDate,
                           )}
-                          visible="false"
                         />
-                        <label for="checkbox">
-                          <Checkbox className="circle" aria-hidden="true" />
-                        </label>
+                        <label for={groceryItem.itemName} />
                       </div>
                     </div>
 
