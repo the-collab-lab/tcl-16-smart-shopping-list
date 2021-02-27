@@ -1,0 +1,69 @@
+@import "../../styles/variables.scss";
+
+.add-item {
+  fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+
+    .radio-group-container {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    [type="radio"] {
+      position: absolute;
+      left: -9999px;
+
+      & + label {
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        line-height: 20px;
+        display: inline-block;
+        color: $black;
+        margin: 20px 0;
+      }
+
+      &:checked + label:before,
+      &:not(:checked) + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        border: 1px solid $black;
+        border-radius: 100%;
+        background: $white;
+      }
+
+      &:checked + label:after,
+      &:not(:checked) + label:after {
+        content: "";
+        width: 19px;
+        height: 19px;
+        background: $black;
+        position: absolute;
+        left: 1px;
+        top: 1px;
+        border-radius: 100%;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+      }
+
+      &:not(:checked) + label:after {
+        opacity: 0;
+      }
+      &:checked + label:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  .image-container {
+    margin-top: 50px;
+  }
+}

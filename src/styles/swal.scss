@@ -1,15 +1,16 @@
 @import "./variables.scss";
 
 .swal-title {
-    color: $black;
-    font-family: $lato;
+  color: $black;
+  font-family: $lato;
 }
-  
+
 .swal-text {
-    font-family: $merriweather;
+  font-family: $merriweather;
 }
-  
+
 .swal-button--confirm {
+<<<<<<< HEAD
     font-size: 15px;
     background-color: $orange;
     @include input;
@@ -18,9 +19,16 @@
     @include maxScreen($tablet) {
         width: auto;
     }
+=======
+  font-size: 15px;
+  background-color: $orange;
+  @include input;
+  width: auto;
+>>>>>>> issue-13-development
 }
-  
+
 .swal-button--cancel {
+<<<<<<< HEAD
     font-size: 15px;
     color: $black;
     background-color: $not-soon;
@@ -31,3 +39,11 @@
         width: auto;
     }
 }
+=======
+  font-size: 15px;
+  color: $black;
+  background-color: $not-soon;
+  @include input;
+  width: auto;
+}
+>>>>>>> issue-13-development

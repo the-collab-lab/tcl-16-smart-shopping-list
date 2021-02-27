@@ -76,7 +76,7 @@ const PopulatedList = () => {
         db.collection(localStorage.getItem("token")).doc(id).delete();
         swal("Item deleted!", {
           icon: "success",
-          button: false
+          button: false,
         });
       }
     });
