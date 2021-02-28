@@ -65,6 +65,7 @@
 }
 
 .deleteItemContainer {
+  margin-top: 5px;
   margin-left: 1em;
 }
 .itemName {
@@ -127,21 +128,23 @@
   content: "";
   border: 4px solid;
   border-radius: 100%;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   left: 0;
   top: 0;
   position: absolute;
+  margin-top: 5px;
 }
 
 .checkbox input:checked + label::after {
   content: "";
   border: 4px solid;
   border-radius: 100%;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   left: 0;
   top: 0;
   position: absolute;
+  margin-top: 5px;
   background-color: black;
 }
