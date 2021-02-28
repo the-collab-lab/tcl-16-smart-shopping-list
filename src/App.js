@@ -15,7 +15,7 @@ const App = () => {
     <Router>
       <Navbar auth={auth} setAuth={setAuth} />
       {auth ? (
-        <div className="App">
+        <main className="App">
           <Switch>
             <Route exact path="/">
               <ListContainer />
@@ -28,7 +28,7 @@ const App = () => {
             </Route>
             <Route component={NotFound} />
           </Switch>
-        </div>
+        </main>
       ) : (
         <Home setAuth={setAuth} />
       )}

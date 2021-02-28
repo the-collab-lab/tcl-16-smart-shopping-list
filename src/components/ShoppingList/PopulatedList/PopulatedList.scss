@@ -1,11 +1,18 @@
 @import "../../../styles/variables.scss";
 
-.itemCard {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid black;
+.headerContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.itemCard {
+  border-top: solid 1px black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .soon {
@@ -26,4 +33,127 @@
 .inactive {
   @extend .itemCard;
   background-color: $inactive;
+}
+
+.listDataContainer {
+  margin-top: 2em;
+}
+
+.listItemContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemArrangement {
+  display: flex;
+  min-width: 30%;
+  justify-content: space-around;
+}
+
+.checkedItemContainer {
+  margin-right: 2rem;
+}
+
+.itemDetailsContainer {
+  margin-left: 1em;
+  min-width: 10em;
+}
+
+.countdownContainer {
+  min-width: 3em;
+  margin-left: 1em;
+}
+
+.deleteItemContainer {
+  margin-top: 5px;
+  margin-left: 1em;
+}
+.itemName {
+  text-transform: lowercase;
+  font-weight: bold;
+  text-align: left;
+}
+
+.itemName::first-letter {
+  text-transform: capitalize;
+}
+
+.lastPurchaseDate {
+  text-align: left;
+}
+.daysNumber {
+  font-family: $lato;
+  font-size: 30px;
+}
+
+.daysText {
+  font-family: $lato;
+  font-size: 10px;
+}
+
+.checkbox {
+  position: relative;
+}
+
+.checkbox input {
+  height: 40px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.checkbox label {
+  display: block;
+  padding: 12px 0 12px 48px;
+}
+
+.checkbox input {
+  height: 40px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+.checkbox input + label::before {
+  content: "";
+  border: 4px solid;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  margin-top: 5px;
+}
+
+.checkbox input:checked + label::after {
+  content: "";
+  border: 4px solid;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  margin-top: 5px;
+  background-color: black;
+}
+
+.clearFilter {
+  margin-top: 3px;
+
+  @include minScreen($tablet) {
+    width: fit-content;
+    margin-left: 3px;
+  }
 }

@@ -47,9 +47,6 @@ ul {
 
 body {
   @include primary-font(18px);
-  @include minScreen($tablet) {
-    font-size: 22px;
-  }
 }
 
 h1 {
@@ -68,6 +65,9 @@ input[type="submit"] {
   border: none;
   outline: none;
   @include input;
+  @include minScreen($tablet) {
+    font-size: 22px;
+  }
 }
 
 // text input styles

@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../../../lib/firebase";
 import "./PopulatedList.scss";
 import calculateEstimate from "../../../lib/estimates";
 import swal from "@sweetalert/with-react";
+import { ReactComponent as DeleteButton } from "../../../img/delete_button.svg";
 
 const PopulatedList = () => {
   const [listData] = useCollection(
@@ -77,6 +78,7 @@ const PopulatedList = () => {
         swal("Item deleted!", {
           icon: "success",
           button: false,
+          timer: 1000,
         });
       }
     });
@@ -143,58 +145,107 @@ const PopulatedList = () => {
     }
   }
 
+  function formatTime(seconds) {
+    const months = {
+      0: "Jan.",
+      1: "Feb.",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "Aug.",
+      8: "Sept.",
+      9: "Oct.",
+      10: "Nov.",
+      11: "Dec.",
+    };
+    const timestamp = new Date(seconds * 1000);
+    return `${
+      months[timestamp.getMonth()]
+    } ${timestamp.getDate()}, ${timestamp.getFullYear()}`;
+  }
+
   return (
-    <div className="shopping-list">
-      <h1>Shopping List</h1>
-      <label>
-        Filter items:{" "}
-        <input
-          aria-label="Filter Items"
-          id="itemFilter"
-          name="itemFilter"
-          type="text"
-          value={filterValue}
-          onChange={onFilterChange}
-        />
-      </label>
-      {filterValue !== "" && (
-        <button aria-label="Clear filter" onClick={resetFilter}>
-          X
-        </button>
-      )}
-      <div>
+    <>
+      <div className="headerContainer">
+        <div className="shoppingListHeader">
+          <h1>Shopping List</h1>
+          <label>
+            Filter Items:{" "}
+            <input
+              aria-label="Filter Items"
+              id="itemFilter"
+              name="itemFilter"
+              type="text"
+              value={filterValue}
+              onChange={onFilterChange}
+            />
+          </label>
+          {filterValue !== "" && (
+            <button
+              className="clearFilter"
+              aria-label="Clear filter"
+              onClick={resetFilter}
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="listDataContainer">
         {listData && (
-          <ul>
+          <div className="listItemContainer">
             {filteredList.map((groceryItem) => (
-              <Fragment key={groceryItem.id}>
+              <div key={groceryItem.id}>
                 <div className={getClassName(groceryItem)}>
-                  <section aria-label="Item name and days to purchase">
-                    {groceryItem.itemName} - {groceryItem.daysToPurchase} days
-                  </section>
-                  <label>
-                    Purchased?{" "}
-                    <input
-                      aria-label="Purchased?"
-                      type="checkbox"
-                      id={groceryItem.itemName}
-                      name={groceryItem.itemName}
-                      value={groceryItem.id}
-                      onChange={(e) => onPurchaseChange(e, groceryItem)}
-                      checked={hasItemBeenPurchased(
-                        groceryItem.lastPurchasedDate,
-                      )}
-                    />{" "}
-                  </label>
-                  <button onClick={() => deleteItemHandler(groceryItem.id)}>
-                    Delete
-                  </button>
+                  <div className="itemArrangement">
+                    <div className="checkedItemContainer">
+                      <div className="checkbox">
+                        <input
+                          aria-label="Purchased?"
+                          type="checkbox"
+                          id={groceryItem.itemName}
+                          name={groceryItem.itemName}
+                          value={groceryItem.id}
+                          onChange={(e) => onPurchaseChange(e, groceryItem)}
+                          checked={hasItemBeenPurchased(
+                            groceryItem.lastPurchasedDate,
+                          )}
+                        />
+                        <label htmlFor={groceryItem.itemName} />
+                      </div>
+                    </div>
+
+                    <div className="itemDetailsContainer">
+                      <div className="itemName">{groceryItem.itemName}</div>
+                      <div className="lastPurchaseDate">
+                        $:{" "}
+                        {groceryItem.lastPurchasedDate
+                          ? formatTime(groceryItem.lastPurchasedDate["seconds"])
+                          : "n/a"}
+                      </div>
+                    </div>
+
+                    <div className="countdownContainer">
+                      <div className="daysNumber">
+                        {groceryItem.daysToPurchase}
+                      </div>
+                      <div className="daysText">days</div>
+                    </div>
+                    <div className="deleteItemContainer">
+                      <DeleteButton
+                        onClick={() => deleteItemHandler(groceryItem.id)}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </Fragment>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

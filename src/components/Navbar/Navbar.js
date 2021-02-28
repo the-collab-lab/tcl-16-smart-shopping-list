@@ -65,7 +65,7 @@ export default function Navbar(props) {
                   <h1>MCB</h1>
                 </Link>
               </li>
-              <li className="navLi"> 
+              <li className="navLi">
                 <Link to="/List">
                   <ListView />
                 </Link>
@@ -76,10 +76,10 @@ export default function Navbar(props) {
                 </Link>
               </li>
               <li className="navLi" onClick={clearTokenHandler}>
-                  <ChangeList />
+                <ChangeList />
               </li>
               <li className="navLi" onClick={shareTokenHandler}>
-                  <ShareList />
+                <ShareList />
               </li>
             </ul>
           </nav>
