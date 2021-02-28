@@ -18,14 +18,14 @@ export default function Navbar(props) {
     swal({
       title: token,
       text:
-        "Write down this three-word token phrase to share access with friends or reaccess this list yourself",
+        "Write down this code to share this list with friends or re-access yourself!",
       dangerMode: true,
     });
   };
 
   const clearTokenHandler = () => {
     swal({
-      title: "Do you want to eject this list and access another?",
+      title: "Do you want to eject and access another list?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -58,22 +58,30 @@ export default function Navbar(props) {
       ) : (
         <header className="navContainer">
           <nav className="navStyle">
-            <Link className="homeLink" to="/">
-              <MCB />
-              <h1>MCB</h1>
-            </Link>
-            <Link className="navLink" to="/List">
-              <ListView />
-            </Link>
-            <Link className="navLink" to="/AddItem">
-              <AddItem />
-            </Link>
-            <Link className="navLink" onClick={clearTokenHandler}>
-              <ChangeList />
-            </Link>
-            <Link className="navLink" onClick={shareTokenHandler}>
-              <ShareList />
-            </Link>
+            <ul>
+              <li className="homeLi">
+                <Link className="homeLink" to="/">
+                  <MCB />
+                  <h1>MCB</h1>
+                </Link>
+              </li>
+              <li className="navLi">
+                <Link to="/List">
+                  <ListView />
+                </Link>
+              </li>
+              <li className="navLi">
+                <Link to="/AddItem">
+                  <AddItem />
+                </Link>
+              </li>
+              <li className="navLi" onClick={clearTokenHandler}>
+                <ChangeList />
+              </li>
+              <li className="navLi" onClick={shareTokenHandler}>
+                <ShareList />
+              </li>
+            </ul>
           </nav>
         </header>
       )}

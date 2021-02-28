@@ -1,12 +1,18 @@
-.navLink {
-  margin-left: 1em;
+.homeLi {
+  float: left;
+}
+
+.navLi {
+  float: left;
+  margin: 2.25em 0.25em 0em;
+  cursor: pointer;
 }
 
 .homeLink {
   display: flex;
   align-items: center;
   color: black;
-  margin-right: 2.5em;
+  margin-right: 2em;
 }
 
 .navContainer {
@@ -16,6 +22,7 @@
 }
 
 .navStyle {
+  list-style-type: none;
   display: flex;
   align-items: center;
   align-content: space-between;

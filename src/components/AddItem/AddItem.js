@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { db } from "../lib/firebase";
+import { db } from "../../lib/firebase";
 import swal from "@sweetalert/with-react";
+// styles
+import "./AddItem.scss";
+// image
+import { ReactComponent as WineDog } from "../../img/wine_dog.svg";
 
 const AddItem = () => {
   const [groceryItem, setGroceryItem] = useState("");
@@ -76,7 +80,7 @@ const AddItem = () => {
     <main className="add-item">
       <h1>Add Item</h1>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="addItem">Item name: </label>
+        <label htmlFor="addItem">Item Name </label>
         <input
           id="addItem"
           name="addItem"
@@ -85,41 +89,44 @@ const AddItem = () => {
           onChange={onGroceryItemInputChange}
           required
         />
-        <fieldset border="none">
+        <fieldset>
           <p>How soon will you buy this again?</p>
-          <input
-            id="soon"
-            value="7"
-            type="radio"
-            name="daysToPurchase"
-            onChange={onRadioInputChange}
-            checked={daysToPurchase === 7}
-            required
-          />
-          <label htmlFor="soon">Soon</label>
-          <br />
-          <input
-            id="kinda-soon"
-            value="14"
-            type="radio"
-            name="daysToPurchase"
-            onChange={onRadioInputChange}
-            checked={daysToPurchase === 14}
-          />
-          <label htmlFor="kinda-soon">Kind of Soon</label>
-          <br />
-          <input
-            id="not-soon"
-            value="30"
-            type="radio"
-            name="daysToPurchase"
-            onChange={onRadioInputChange}
-            checked={daysToPurchase === 30}
-          />
-          <label htmlFor="not-soon">Not Soon</label>
+          <div className="radio-group-container">
+            <input
+              id="soon"
+              value="7"
+              type="radio"
+              name="daysToPurchase"
+              onChange={onRadioInputChange}
+              checked={daysToPurchase === 7}
+              required
+            />
+            <label htmlFor="soon">Soon</label>
+            <input
+              id="kinda-soon"
+              value="14"
+              type="radio"
+              name="daysToPurchase"
+              onChange={onRadioInputChange}
+              checked={daysToPurchase === 14}
+            />
+            <label htmlFor="kinda-soon">Kind of Soon</label>
+            <input
+              id="not-soon"
+              value="30"
+              type="radio"
+              name="daysToPurchase"
+              onChange={onRadioInputChange}
+              checked={daysToPurchase === 30}
+            />
+            <label htmlFor="not-soon">Not Soon</label>
+          </div>
         </fieldset>
-        <input type="submit" value="Add to List" />
+        <input type="submit" value="Add to Shopping List" />
       </form>
+      <div className="image-container">
+        <WineDog />
+      </div>
     </main>
   );
 };
