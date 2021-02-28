@@ -183,7 +183,11 @@ const PopulatedList = () => {
             />
           </label>
           {filterValue !== "" && (
-            <button aria-label="Clear filter" onClick={resetFilter}>
+            <button
+              className="clearFilter"
+              aria-label="Clear filter"
+              onClick={resetFilter}
+            >
               Clear
             </button>
           )}
@@ -209,7 +213,7 @@ const PopulatedList = () => {
                             groceryItem.lastPurchasedDate,
                           )}
                         />
-                        <label for={groceryItem.itemName} />
+                        <label htmlFor={groceryItem.itemName} />
                       </div>
                     </div>
 

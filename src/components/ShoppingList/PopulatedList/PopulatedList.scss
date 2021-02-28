@@ -148,3 +148,12 @@
   margin-top: 5px;
   background-color: black;
 }
+
+.clearFilter {
+  margin-top: 3px;
+
+  @include minScreen($tablet) {
+    width: fit-content;
+    margin-left: 3px;
+  }
+}
