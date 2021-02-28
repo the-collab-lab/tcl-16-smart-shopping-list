@@ -172,7 +172,7 @@ const PopulatedList = () => {
         <div className="shoppingListHeader">
           <h1>Shopping List</h1>
           <label>
-            Filter items:{" "}
+            Filter Items:{" "}
             <input
               aria-label="Filter Items"
               id="itemFilter"

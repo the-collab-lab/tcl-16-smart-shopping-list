@@ -80,15 +80,17 @@ const AddItem = () => {
     <main className="add-item">
       <h1>Add Item</h1>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="addItem">Item Name </label>
-        <input
-          id="addItem"
-          name="addItem"
-          type="text"
-          value={groceryItem}
-          onChange={onGroceryItemInputChange}
-          required
-        />
+        <label htmlFor="addItem">
+          Item Name:{" "}
+          <input
+            id="addItem"
+            name="addItem"
+            type="text"
+            value={groceryItem}
+            onChange={onGroceryItemInputChange}
+            required
+          />
+        </label>
         <fieldset>
           <p>How soon will you buy this again?</p>
           <div className="radio-group-container">
