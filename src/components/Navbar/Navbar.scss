@@ -1,0 +1,29 @@
+.homeLi {
+  float: left;
+}
+
+.navLi {
+  float: left;
+  margin: 2.25em 0.25em 0em;
+  cursor: pointer;
+}
+
+.homeLink {
+  display: flex;
+  align-items: center;
+  color: black;
+  margin-right: 2em;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navStyle {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+}
