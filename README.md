@@ -1,9 +1,11 @@
 # Meat Cheese Bread (MCB)
 
 Meat Cheese Bread is a React/Firebase web application that tcl-16 collaborated on as part of The Collab Lab's Winter 2021 cohort. Over an 8-week period we created a “smart” shopping list app that learns your buying habits and helps you remember what you will likely to need to buy on your next trip to the store.
-
+#### What does that mean?
 As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”) into your list. Each time you buy the item, you mark it as purchased in the list. Over time, the app comes to understand the intervals at which you buy different items. If an item is likely to be due to be bought soon, it rises to the top of the shopping list.
 
+#### Want to see more?
+Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [video demo](https://youtu.be/nDnrDOTV8zw)! You can join an existing list with: `mark marks swipe`
 ## Getting Started
 ### Download Node and NPM
 * `npm` is distributed with Node.js which means that when you download Node.js, you automatically get `npm` installed on your computer.
