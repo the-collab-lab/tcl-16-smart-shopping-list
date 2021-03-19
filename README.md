@@ -1,11 +1,15 @@
 # Meat Cheese Bread (MCB)
 
-Meat Cheese Bread is a React/Firebase web application that tcl-16 collaborated on as part of The Collab Lab's Winter 2021 cohort. Over an 8-week period we created a “smart” shopping list app that learns your buying habits and helps you remember what you will likely to need to buy on your next trip to the store.
-#### What does that mean?
+Meat Cheese Bread is a React/Firestore web application that tcl-16 collaborated on as part of The Collab Lab's Winter 2021 cohort. Over an 8-week period we created a “smart” shopping list app that learns your buying habits and helps you remember what you will likely to need to buy on your next trip to the store.
+
+<img width="1326" alt="Multi device mockup of Meat Cheese Bread" src="https://user-images.githubusercontent.com/62153993/111797842-e2222c00-889f-11eb-87f2-a47469b76c57.png">
+
+#### How does it work?
 As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”) into your list. Each time you buy the item, you mark it as purchased in the list. Over time, the app comes to understand the intervals at which you buy different items. If an item is likely to be due to be bought soon, it rises to the top of the shopping list.
 
 #### Want to see more?
 Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [video demo](https://youtu.be/nDnrDOTV8zw)! You can join an existing list with: `mark marks swipe`
+
 ## Getting Started
 ### Download Node and NPM
 * `npm` is distributed with Node.js which means that when you download Node.js, you automatically get `npm` installed on your computer.
@@ -30,7 +34,7 @@ Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [vid
 * After you’ve cloned the project locally and updated the dependencies, run the project by typing the following into your terminal: `npm start`. You should be able to see the project at `localhost:3000`
 
 ## Features
-### Users
+### User
 * Join an existing list (log in)
 * Create a new list (sign up)
 * Switch lists (sign out)
@@ -47,10 +51,11 @@ Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [vid
 * Learns overtime when the user should anticipate when to buy items on their list based on how many times the user bought it and the intervals between purchase dates
 * Delete items from the list
 
-## Tech Stack
-* React
-* Firebase
-* SASS
+## Tech Stack & Tools
+* [React](https://reactjs.org)
+* [Google's Firestore](https://firebase.google.com/products/firestore)
+* [SASS](https://sass-lang.com)
+* [Sweet Alert](https://sweetalert.js.org)
 
 ## Contributors
 <table>
