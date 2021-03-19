@@ -51,10 +51,14 @@ Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [vid
 * Learns overtime when the user should anticipate when to buy items on their list based on how many times the user bought it and the intervals between purchase dates
 * Delete items from the list
 
-## Tech Stack & Tools
+## Tech Stack
 * [React](https://reactjs.org)
 * [Google's Firestore](https://firebase.google.com/products/firestore)
 * [SASS](https://sass-lang.com)
+
+## Tools
+* [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks)
+* [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
 * [Sweet Alert](https://sweetalert.js.org)
 
 ## Contributors
