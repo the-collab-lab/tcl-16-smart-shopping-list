@@ -1,4 +1,4 @@
-# Meat Cheese Bread (MCB)
+# Meat Cheese Bread (MCB) [![Netlify Status](https://api.netlify.com/api/v1/badges/433a0176-1abf-403b-82ac-6fa7882900bf/deploy-status)](https://app.netlify.com/sites/tcl-16-smart-shopping-list/deploys)
 
 Meat Cheese Bread is a React/Firestore web application that tcl-16 collaborated on as part of The Collab Lab's Winter 2021 cohort. Over an 8-week period we created a “smart” shopping list app that learns your buying habits and helps you remember what you will likely to need to buy on your next trip to the store.
 
