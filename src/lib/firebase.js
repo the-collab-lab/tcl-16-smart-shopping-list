@@ -1,16 +1,17 @@
 // NOTE: import only the Firebase modules that you need in your app... except
 // for the second line, which makes both the linter and react-firebase happy
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 // Initalize Firebase.
 var firebaseConfig = {
-  apiKey: 'AIzaSyAryrdGGzIRpgNIBOYTYm1nbAGP1n60m3E',
-  authDomain: 'tcl-16-shopping-list.firebaseapp.com',
-  projectId: 'tcl-16-shopping-list',
-  storageBucket: 'tcl-16-shopping-list.appspot.com',
-  messagingSenderId: '673795137687',
-  appId: '1:673795137687:web:0cca36b195ad94bd0c89d2',
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
+  measurementId: process.env.REACT_APP_measurementId,
 };
 
 let fb = firebase.initializeApp(firebaseConfig);
