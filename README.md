@@ -4,11 +4,11 @@ Meat Cheese Bread is a React/Firestore web application that tcl-16 collaborated 
 
 <img width="1326" alt="Multi device mockup of Meat Cheese Bread" src="https://user-images.githubusercontent.com/62153993/111797842-e2222c00-889f-11eb-87f2-a47469b76c57.png">
 
-#### How does it work?
+### How does it work?
 As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”) into your list. Each time you buy the item, you mark it as purchased in the list. Over time, the app comes to understand the intervals at which you buy different items. If an item is likely to be due to be bought soon, it rises to the top of the shopping list.
 
-#### Want to see more?
-Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [video demo](https://youtu.be/nDnrDOTV8zw)! You can join an existing list with: `mark marks swipe`
+### Want to see more?
+Interact with the [live site](https://meatcheesebread.xyz) and/or watch the [video demo](https://youtu.be/nDnrDOTV8zw)! You can join an existing list with: `actor racy artie`
 
 ## Getting Started
 ### Download Node and NPM
