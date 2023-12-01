@@ -4,11 +4,11 @@
 
 ### Locations for things
 
-- Site: [Production Site](https://tcl-16-smart-shopping-list.netlify.app)
+- Site: [Production Site](https://tcl-16-shopping-list.web.app)
 - Repo: [https://github.com/the-collab-lab/tcl-16-smart-shopping-list](https://github.com/the-collab-lab/tcl-16-smart-shopping-list)
 - Clone URL: `https://github.com/the-collab-lab/tcl-16-smart-shopping-list.git`
 - Issue list: [https://github.com/the-collab-lab/tcl-16-smart-shopping-list/issues](https://github.com/the-collab-lab/tcl-16-smart-shopping-list/issues)
-- Database: [https://console.firebase.google.com/u/0/project/tcl-16-smart-shopping-list/firestore](https://console.firebase.google.com/u/0/project/tcl-16-smart-shopping-list/firestore)
+- Database: [https://console.firebase.google.com/u/0/project/tcl-16-shopping-list/firestore](https://console.firebase.google.com/u/0/project/tcl-16-shopping-list/firestore)
 
 ### Project cadence & duration
 
