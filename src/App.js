@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./styles/base.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 import NotFound from "./components/NotFound";
 import AddItem from "./components/AddItem/AddItem";
@@ -18,6 +19,7 @@ const App = () => {
         <main className="App">
           <Switch>
             <Route exact path="/">
+              <ArchivalNoticeModal />
               <ListContainer />
             </Route>
             <Route exact path="/List">
